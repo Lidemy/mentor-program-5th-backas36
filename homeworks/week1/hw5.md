@@ -9,28 +9,26 @@
 
 ## 後端
 
-當 request 給 server 後，server 會把資料傳到 database 資料庫來驗證，如果都正確之後，database 會將登入後的畫面傳給 server，也就是 response 登入後的頁面呈現給訪問者。
+當 request 給 server 後，server 會把資料傳到 database 資料庫來儲存，儲存成功後， server 就會 response 登入後的頁面呈現給訪問者。
 
 後端使用的語言需要與資料庫搭配學習，例如 PHP 與 MySQL ，在後端中，重點在於邏輯，而前端則是在於美感與設計。
-
-![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/2cbd2086-f59d-48b1-b5e0-1090faff445b/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210416%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210416T092153Z&X-Amz-Expires=86400&X-Amz-Signature=68f13f349fe5ae13c0e77ccf59bcbfb8baa0c99caaae3f6de1a67a633c42d1db&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
 
 
 ---
 
 # 假設我今天去 Google 首頁搜尋框打上：JavaScript 並且按下 Enter，請說出從這一刻開始到我看到搜尋結果為止發生在背後的事情。
 
-![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a3fbc82e-af1a-47f4-a0a8-b4275f571b2e/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210416%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210416T092312Z&X-Amz-Expires=86400&X-Amz-Signature=e9f39facab21273c91f44d60666a7e42257fa537195619911babbf9ed9ead9f7&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
+![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a3fbc82e-af1a-47f4-a0a8-b4275f571b2e/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210418%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210418T031550Z&X-Amz-Expires=86400&X-Amz-Signature=3b807915719a09ebc598de024624301c2fe2d4f50f854d53059a19298b1ea03a&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
 
 - 當我們按下 Enter 後，其實就是在對 google Server 送出 request，瀏覽器會先 DNS 尋找網站的伺服器。
     - DNS：網域名稱系統 Domain Name Servers，DNS 其實就像是網址的通訊錄一樣。瀏覽器需要找到正確的伺服器才能將 http 訊息傳送到正確的地方。
-    - HTTP：超文本傳輸協定 Hypertext Transfer Protocol。白話一點就是伺服器和 Client 端使用的語言。
+    - HTTP：超文本傳輸協定 Hypertext Transfer Protocol。白話一點就是伺服器和 Client 端使用的協定，去協定兩邊要怎麼來交換資訊。
 
 ### 在此例子中，瀏覽器會向 google 的 Server 發出要找尋 JavaScript 的頁面，瀏覽器就會去 DNS 找託管的伺服器。
 
 - 瀏覽器會向伺服器傳送 HTTP 訊息，請求伺服器 response 正確的網站，在這當下，TCP/IP 就是負責他們之間的傳送。
     - TCP/IP ：傳輸控制協定和網際網路協定。也就是定義資料該怎麼在網路運作的協定。
-- 當 Server 準備回送 Javascript 搜尋頁面時，會傳送 200 OK 訊息，接著瀏覽器開始以資料封包的形式呈現正確的頁面給訪問者。
+- 透過 DNS 找到正確位置之後，Server 會回傳剛剛發出的 JavaScript 搜尋頁面 ，也就是 response 給 client 端，
 
 ---
 # 請列舉出 3 個「課程沒有提到」的 command line 指令並且說明功用
