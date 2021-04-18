@@ -28,12 +28,12 @@ Committed：已提交。也就是這個笑話已經完整且保存。
 **Working Directory、Staging Area、.git directory**
 
 
-![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/7ed40038-346f-45bd-bd02-921c7150d6af/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210416%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210416T060708Z&X-Amz-Expires=86400&X-Amz-Signature=841e86f35a04825bb51c5fcee91581d5ad38ab4dd4d25bc70ffadc4fe9ffc6f7&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
+![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/7ed40038-346f-45bd-bd02-921c7150d6af/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210418%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210418T025436Z&X-Amz-Expires=86400&X-Amz-Signature=f3e973eb53ac62d7587da4b44ccff6985eaedf6c3e421467c79d83eabb64e8a1&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
 # 開始來學 Git 基礎吧
 
 現在我們已經有了 Git 概念了，我們繼續沿用菜哥笑話這劇本，菜哥把原先擁有的三種笑話除存在 joke 資料夾當中，如下：
 
-![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f6ab954e-965d-491a-b947-da3182705fcd/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210416%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210416T060807Z&X-Amz-Expires=86400&X-Amz-Signature=60a6d0c3c11c5a9131c229a779b579842520d8088645c618775dbd3b86a6efbc&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
+![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f6ab954e-965d-491a-b947-da3182705fcd/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210418%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210418T025448Z&X-Amz-Expires=86400&X-Amz-Signature=0cf6073a7d065b11ded98d74b8614e27dae1d3d10562d2ee6005136fe6ffba90&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
 
 ## 首先需要初始化來將 joke 資料夾開始版本控制
 
@@ -45,7 +45,7 @@ $git init
 
 執行後，在 joke 資料夾底下會多個子目錄，但此時只是初始化的操作，所有的笑話還沒有正式被版本控制。
 
-![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/6143ec50-712e-4ba0-95dc-d6edf8948bc3/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210416%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210416T060924Z&X-Amz-Expires=86400&X-Amz-Signature=b24610496368619077d966af4193481c821e97096b6fcdc7eee41d445d88e022&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
+![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/6143ec50-712e-4ba0-95dc-d6edf8948bc3/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210418%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210418T025512Z&X-Amz-Expires=86400&X-Amz-Signature=312709d6d278ae7c71599fee05d917d4b0fbbdb0521c3006a26d868b8ee2d211&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
 
 ## 初始化後，我們得紀錄每次笑話的更新
 
@@ -55,31 +55,34 @@ git init 後，每當我們對笑話進行更新，或者當我們需要紀錄�
 
 而菜哥可以隨時使用 $git status 指令，來觀察 repo 裡面檔案的狀態：
 
-![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5fcb8446-c47c-43d1-bdad-d3246ec3255f/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210416%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210416T060946Z&X-Amz-Expires=86400&X-Amz-Signature=2e1ff4c2a5780f41b227889b176899dbebfa5f0175173298f942193abdaf93b0&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
+![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5fcb8446-c47c-43d1-bdad-d3246ec3255f/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210418%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210418T025527Z&X-Amz-Expires=86400&X-Amz-Signature=ace90e1723ca87450e3e4ed7d084d0d2c54f1c46264c4445d0dd79f9c30d2a3a&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
 
 此時 Git 會提示我們記得追蹤那些 untracked 的檔案，也就是執行 $git add 來追蹤
 
 >- $git add <檔案名>    
   追蹤該檔案
 - $git add .          
-  追蹤所有尚未追蹤的檔案
+  追蹤目前目錄尚未追蹤的檔案
+- $git add ..
+    追蹤此目錄以及上層尚未追蹤的檔案
 
-![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/effd5eda-2bbf-4873-8858-8010f9cd4b75/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210416%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210416T061159Z&X-Amz-Expires=86400&X-Amz-Signature=249cbfff9e289ac68f48eeebae4ecf52ddd4618f9ea39f5a012b316d645ff952&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
+![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/effd5eda-2bbf-4873-8858-8010f9cd4b75/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210418%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210418T025604Z&X-Amz-Expires=86400&X-Amz-Signature=a685dcd664840fcd332cfe49964eea107369719a1bda234ae0fa20dfaf1515a6&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
 
 >如果有需要忽略要做管理的檔案，我們可以建立一個 .gitignore 的文件，並在此文件中輸入需要忽略文件名稱
+
 
 ## 最後一步的提交，千萬別忘記
 
 當菜哥把所有笑話都追蹤之後，就是最重要的 commit 了，git 會提示我們目前準備被提交的檔案有哪些，在提交之前務必菜哥要檢查一下是否所有需要追蹤的檔案已經 $git add 過了，所以菜哥可以養成習慣在 commit 之前，$git status 一下，確認是否檔案已經進入 staged，確認完畢後，接著再執行 $git commit -m /message/
 
-![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/3dd8faf4-9382-42b4-823f-09f9a5c0bbcb/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210416%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210416T061224Z&X-Amz-Expires=86400&X-Amz-Signature=b3a920bcc46ab25a2bee723e98ba4eda8282c250bbb707c5e3720e39e0d372b9&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
+![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/3dd8faf4-9382-42b4-823f-09f9a5c0bbcb/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210418%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210418T025621Z&X-Amz-Expires=86400&X-Amz-Signature=203b2bba4aaff55b5a8b810e8ab0772eb51b85320305a5537a4cbce95c7edcaf&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
 
 >其實如果菜哥懶得先 add 再 commit 也可直接執行 $git commit -am "message" 
 這樣 Git 就知道我們要一次執行 add 和 commit 了 。
 
 之後菜哥可以執行 $git status 來查看：
 
-![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/44446ecb-937b-4688-a80c-bee9e84a3fff/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210416%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210416T061456Z&X-Amz-Expires=86400&X-Amz-Signature=c8d017f61b6ad24d54e701ad689e8c0780b66b658ad046142d1ad1fa7889185b&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
+![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/44446ecb-937b-4688-a80c-bee9e84a3fff/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210418%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210418T025643Z&X-Amz-Expires=86400&X-Amz-Signature=560c4e5b44e5f2e8ad0a637c0652421a3016519fc9fef9d36d04408347aa2f10&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
 
 大致上，Git 最重要的步驟就是以上了，現在菜哥可以隨時利用 $git log 來查看歷史紀錄
 

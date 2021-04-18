@@ -18,7 +18,7 @@
 	>如果需要查看目前有哪些分支可以輸入 ``` git branch ``` 來查看
 	
 	>或者可以在創建分支的時候馬上直接切換，在創建分支時執行 
-	``` git branch -b week1``` 這樣就會創建分支後直接切換至week1分支，就不用再執行```git checkout week1``` 
+	``` git checkout -b week1``` 這樣就會創建分支後直接切換至week1分支，就不用再執行```git checkout week1``` 
 
 * 寫完全部作業後，記得提交也就是 add 以及 commit
 	```git commit -am "week1 homework"```
