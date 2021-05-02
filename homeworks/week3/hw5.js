@@ -32,13 +32,10 @@ const battle = (a, b, rule) => {
   } else if (a.length < b.length) {
     return rule === '-1' ? 'A' : 'B'
   } else {
-    for (let i = 0; i < a.length; i++) {
-      if (a[i] === b[i]) continue
-      if (a[i] > b[i]) {
-        return rule === '1' ? 'A' : 'B'
-      } else {
-        return rule === '1' ? 'B' : 'A'
-      }
+    if (rule === '1') {
+      return a > b ? 'A' : 'B'
+    } else {
+      return a < b ? 'A' : 'B'
     }
   }
 }
