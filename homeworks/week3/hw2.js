@@ -13,8 +13,8 @@ rl.on('line', (line) => {
 
 // 上面都不用管，只需要完成這個 function 就好，可以透過 lines[i] 拿取內容
 const solve = (lines) => {
-  const n = +lines[0].split(' ')[0]
-  const m = +lines[0].split(' ')[1]
+  const n = Number(lines[0].split(' ')[0])
+  const m = Number(lines[0].split(' ')[1])
   for (let i = n; i <= m; i++) {
     if (flower(i)) console.log(i)
   }

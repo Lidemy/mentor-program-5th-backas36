@@ -22,22 +22,9 @@ function solve(lines) {
 
 const battle = (a, b, rule) => {
   if (a === b) return 'DRAW'
-  if (a.length === 1 && b.length === 1) {
-    if (rule === '1') return a > b ? 'A' : 'B'
-    if (rule === '-1') return a < b ? 'A' : 'B'
-  }
-
-  if (a.length > b.length) {
-    return rule === '1' ? 'A' : 'B'
-  } else if (a.length < b.length) {
-    return rule === '-1' ? 'A' : 'B'
-  } else {
-    if (rule === '1') {
-      return a > b ? 'A' : 'B'
-    } else {
-      return a < b ? 'A' : 'B'
-    }
-  }
+  if (rule === '-1') [a, b] = [b, a]
+  if (a.length === b.length) return (a > b) ? 'A' : 'B'
+  return (a.length > b.length) ? 'A' : 'B'
 }
 
 // 輸入結束，開始針對 lines 做處理
