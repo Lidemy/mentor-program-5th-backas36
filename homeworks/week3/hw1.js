@@ -10,7 +10,7 @@ rl.on('line', (line) => {
 })
 
 function solve(input) {
-  for (let i = 1; i <= lines[0]; i++) {
+  for (let i = 1; i <= Number(lines[0]); i++) {
     console.log('*'.repeat(i))
   }
 }
