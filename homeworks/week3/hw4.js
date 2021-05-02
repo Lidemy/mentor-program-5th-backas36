@@ -12,7 +12,7 @@ rl.on('line', (line) => {
 })
 
 // 上面都不用管，只需要完成這個 function 就好，可以透過 lines[i] 拿取內容
-function solve(lines) {
+const solve = (lines) => {
   let str = ''
   for (let i = lines[0].length - 1; i >= 0; i--) {
     str += lines[0][i]
