@@ -12,7 +12,7 @@ rl.on('line', (line) => {
 })
 
 // 上面都不用管，只需要完成這個 function 就好，可以透過 lines[i] 拿取內容
-function solve(lines) {
+const solve = (lines) => {
   for (let i = 1; i < lines.length; i++) {
     let isPrime = true
     if (+lines[i] === 1) isPrime = false
