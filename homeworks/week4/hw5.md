@@ -17,12 +17,12 @@ API 的全名是 Application Programming Interface。
 
 ## 假設你現在是個餐廳平台，需要提供 API 給別人串接並提供基本的 CRUD 功能，包括：回傳所有餐廳資料、回傳單一餐廳資料、刪除餐廳、新增餐廳、更改餐廳，你的 API 會長什麼樣子？請提供一份 API 文件。
 
-| 說明     | Method | path       | 參數                   | 範例             |
-|--------|--------|------------|----------------------|----------------|
-| 獲取所有餐廳資料 | GET    | /restaurant     | 無           | 無 |
-| 獲取單一餐廳資料 | GET    | /restaurant/:id | 無                    | /restaurant/5      |
-| 新增餐廳   | POST   | /restaurant     | name: 餐廳名  | 無              |
-| 刪除餐廳   | DELETE   | /restaurant/:id     | 無 | /restaurant/123              |
-| 更改餐廳資訊   | PATCH   | /restaurant/:id     | name: 餐廳名 | 無              |
+| 說明             | Method | path            | 參數         | 範例            |
+| ---------------- | ------ | --------------- | ------------ | --------------- |
+| 獲取所有餐廳資料 | GET    | /restaurant     | 無           | 無              |
+| 獲取單一餐廳資料 | GET    | /restaurant/:id | 無           | /restaurant/5   |
+| 新增餐廳         | POST   | /restaurant     | name: 餐廳名 | 無              |
+| 刪除餐廳         | DELETE | /restaurant/:id | 無           | /restaurant/123 |
+| 更改餐廳資訊     | PATCH  | /restaurant/:id | name: 餐廳名 | 無              |
 
-
+Base URL: https://restaurant-api-info.com
