@@ -12,8 +12,8 @@ function main() {
     let data
     try {
       data = JSON.parse(body)
-    } catch (e) {
-      console.log(e)
+    } catch (err) {
+      console.log(err)
     }
     if (data.status === 404) {
       return console.log('找不到這個國家')

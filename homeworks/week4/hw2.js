@@ -30,8 +30,8 @@ const readBook = (id) => {
     let data
     try {
       data = JSON.parse(body)
-    } catch (e) {
-      console.log(e)
+    } catch (err) {
+      console.log(err)
     }
     console.log(data.name)
   })
