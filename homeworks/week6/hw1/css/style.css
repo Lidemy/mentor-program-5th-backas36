@@ -152,7 +152,7 @@ h2 {
   color: #484848;
 }
 .reviews__flex .review {
-  width: 33%;
+  width: 100%;
   margin: 0 15px;
   border: solid 1px #c7e5ec;
   border-radius: 5px;
@@ -238,7 +238,7 @@ footer {
     margin: 40px 0;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 575px) {
   .siteinfo__buttons-query {
     margin-left: 0;
     margin-top: 12px;
@@ -246,7 +246,7 @@ footer {
   .footer__top-flex {
     flex-direction: column-reverse;
   }
-  .footer__top-shofinfo {
+  .footer__top-shopfinfo {
     margin-right: 0;
     margin-top: 20px;
   }

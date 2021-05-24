@@ -1,0 +1,71 @@
+body {
+  border-top: 8px solid #fad312;
+}
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 50px 40px;
+}
+
+h1.form__title {
+  font-size: 36px;
+}
+
+.form__detail {
+  font-size: 14px;
+  margin-bottom: 50px;
+}
+.form__detail > p:last-child {
+  color: #e74149;
+  font-size: 16px;
+}
+.require {
+  vertical-align: super;
+  color: #e74149;
+}
+form > div > label:nth-child(1) {
+  font-size: 20px;
+  margin-top: 50px;
+  display: block;
+}
+
+input {
+  padding: 2px 5px;
+  border: 1px solid #d0d0d0;
+}
+
+.types > input[id="bed"] {
+  margin-bottom: 20px;
+}
+
+input[id="other"] {
+  margin-top: 20px;
+}
+
+label[for="other"] {
+  margin-bottom: -12px;
+}
+.sublabel {
+  font-size: 14px;
+  display: inline-block;
+}
+
+input[type="submit"] {
+  margin-top: 60px;
+  margin-bottom: 20px;
+  padding: 15px 30px;
+  background-color: #fad312;
+  border: 0px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+input[type="submit"]:hover {
+  background-color: rgba(250, 211, 18, 0.8);
+}
+
+@media (max-width: 576px) {
+  h1.form__title {
+    font-size: 30px;
+  }
+}
