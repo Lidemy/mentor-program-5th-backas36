@@ -1,61 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>新拖延運動報名表單</title>
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/style.css">
+  <title>新拖延運動表單</title>
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
   <div class="wrapper">
-    <h1 class="form__title">新拖延運動報名表單</h1>
-    <div class="form__detail">
-      <p>活動日期：2020/12/10 ~ 2020/12/11</p>
-      <p>活動地點：台北市大安區新生南路二段1號</p>
-      <p><span class="require">*</span>必填</p>
-    </div>
-    <form action="" class="form">
-      <div class="username">
-        <label for="username">暱稱<span class="require">*</span></label><br>
-        <input type="text" id="username" placeholder="您的回答" required>
+    <form action="" class="apply__form">
+      <h1 class="apply__form-title">新拖延運動表單</h1>
+      <p class="apply__form-desc">
+        活動日期：2020/12/10 ~ 2020/12/11 <br>
+        活動地點：台北市大安區新生南路二段1號
+      </p>
+      <p class="apply__form-notice">* 必填</p>
+      <div class="input__block">
+        <div class="input__block-title required">暱稱</div>
+        <div class="input__block-input">
+          <input type="text" name="nickname">
+        </div>
       </div>
-      <div class="email">
-        <label for="email">電子郵件<span class="require">*</span></label><br>
-        <input type="email" id="email" placeholder="您的電子郵件" required>
+      <div class="input__block">
+        <div class="input__block-title required">電子郵件</div>
+        <div class="input__block-input">
+          <input type="text" name="email">
+        </div>
       </div>
-      <div class="phone">
-        <label for="phone">手機號碼<span class="require">*</span></label><br>
-        <input type="text" id="phone" placeholder="您的手機號碼" required>
+      <div class="input__block">
+        <div class="input__block-title required">手機號碼</div>
+        <div class="input__block-input">
+          <input type="text" name="phone">
+        </div>
       </div>
-      <div class="types">
-        <label for="">報名類型<span class="require">*</span></label><br>
-        <input type="radio" id="bed" name="types" value="bed">
-        <label for="bed">躺在床上用想像力實作</label><br>
-        <input type="radio" id="floor" name="types" value="floor">
-        <label for="floor">趴在地上滑手機找現成的</label>
+      <div class="input__block">
+        <div class="input__block-title required">報名類型</div>
+        <div class="input__block-input">
+          <label>
+            <input type="radio" value="1" name="type">
+            躺在床上用想像力實作
+          </label>
+          <label>
+            <input type="radio" value="2" name="type">
+            趴在地上滑手機找現成的
+          </label>
+        </div>
       </div>
-      <div class="source">
-        <label for="source">怎麼知道這個活動的？<span class="require">*</span></label><br>
-        <input type="text" id="source" placeholder="您的回答" required>
+      <div class="input__block">
+        <div class="input__block-title required">怎麼知道這個活動的？</div>
+        <div class="input__block-input">
+          <input type="text" name="referal">
+        </div>
       </div>
-      <div class="other">
-        <label for="other">其他</label>
-        <br>
-        <label for="other" class="sublabel">對活動的一些建議</label><br>
-        <input type="text" placeholder="您的回答" id="other">
+      <div class="input__block">
+        <div class="input__block-title">其他</div>
+        <div class="input__block-desc">
+          對活動的一些建議
+        </div>
+        <div class="input__block-input">
+          <input type="text" name="other">
+        </div>
       </div>
-      <div class="submit">
-        <input type="submit" value="提交">
-      </div>
-      <div class="info">
+      <input type="submit" class="apply__form-submit">
+      <p class="apply__form-desc">
         請勿透過表單送出您的密碼。
-      </div>
+      </p>
     </form>
   </div>
+  <footer>
+    © 2020 © Copyright. All rights Reserved.
+  </footer>
 </body>
 
 </html>
