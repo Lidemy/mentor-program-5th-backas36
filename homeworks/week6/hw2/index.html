@@ -12,34 +12,35 @@
 
 <body>
   <div class="wrapper">
-    <form action="" class="apply__form">
-      <h1 class="apply__form-title">新拖延運動表單</h1>
-      <p class="apply__form-desc">
+    <form>
+      <h1 class="form__title">新拖延運動表單</h1>
+      <p class="form__desc">
         活動日期：2020/12/10 ~ 2020/12/11 <br>
         活動地點：台北市大安區新生南路二段1號
       </p>
-      <p class="apply__form-notice">* 必填</p>
-      <div class="input__block">
-        <div class="input__block-title required">暱稱</div>
-        <div class="input__block-input">
+      <p class="form__notice">* 必填</p>
+      <!-- form content -->
+      <div class="form__block">
+        <div class="form__block_title wraning">暱稱</div>
+        <div class="form__block_input">
           <input type="text" name="nickname">
         </div>
       </div>
-      <div class="input__block">
-        <div class="input__block-title required">電子郵件</div>
-        <div class="input__block-input">
+      <div class="form__block">
+        <div class="form__block_title warning">電子郵件</div>
+        <div class="form__block_input">
           <input type="text" name="email">
         </div>
       </div>
-      <div class="input__block">
-        <div class="input__block-title required">手機號碼</div>
-        <div class="input__block-input">
+      <div class="form__block">
+        <div class="form__block_title warning">手機號碼</div>
+        <div class="form__block_input">
           <input type="text" name="phone">
         </div>
       </div>
-      <div class="input__block">
-        <div class="input__block-title required">報名類型</div>
-        <div class="input__block-input">
+      <div class="form__block">
+        <div class="form__block_title warning">報名類型</div>
+        <div class="form__block_input">
           <label>
             <input type="radio" value="1" name="type">
             躺在床上用想像力實作
@@ -50,23 +51,23 @@
           </label>
         </div>
       </div>
-      <div class="input__block">
-        <div class="input__block-title required">怎麼知道這個活動的？</div>
-        <div class="input__block-input">
+      <div class="form__block">
+        <div class="form__block_title warning">怎麼知道這個活動的？</div>
+        <div class="form__block_input">
           <input type="text" name="referal">
         </div>
       </div>
-      <div class="input__block">
-        <div class="input__block-title">其他</div>
-        <div class="input__block-desc">
+      <div class="form__block">
+        <div class="form__block_title">其他</div>
+        <div class="form__block_desc">
           對活動的一些建議
         </div>
-        <div class="input__block-input">
+        <div class="form__block_input">
           <input type="text" name="other">
         </div>
       </div>
-      <input type="submit" class="apply__form-submit">
-      <p class="apply__form-desc">
+      <input type="submit" class="form__submit">
+      <p class="form__submit_desc">
         請勿透過表單送出您的密碼。
       </p>
     </form>
