@@ -11,59 +11,59 @@ body {
   padding: 64px 32px;
 }
 
-.apply__form-title {
+.form__title {
   margin: 0;
   font-size: 36px;
   font-weight: bold;
 }
 
-.apply__form-desc {
+.form__desc {
   margin-top: 35px;
   font-size: 14px;
   line-height: 2em;
 }
 
-.apply__form-notice {
+.form__notice {
   font-size: 16px;
   color: #e74149;
   margin-top: 20px;
 }
 
-.required::after {
+.warning::after {
   content: '*';
   color: #e74149;
   margin-left: 8px;
 }
 
-.input__block {
+.form__block {
   margin-top: 55px;
 }
 
-.input__block-title {
+.form__block_title {
   font-size: 20px;
 }
 
-.input__block-desc {
+.form__block_desc {
   font-size: 14px;
   margin-top: 8px;
 }
 
-.input__block-input {
+.form__block_input {
   margin-top: 16px;
 }
 
-.input__block-input input[type="text"] {
+.form__block_input input[type="text"] {
   border: solid 1px #d0d0d0;
   font-size: 16px;
   padding: 3px 12px;
 }
 
-.input__block-input label {
+.form__block_input label {
   display: block;
   margin-top: 12px;
 }
 
-.apply__form-submit {
+.form__submit {
   background-color: #fad312;
   color: black;
   padding: 12px 32px;
