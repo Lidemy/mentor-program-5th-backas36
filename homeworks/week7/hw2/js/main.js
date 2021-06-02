@@ -1,4 +1,6 @@
-const faqQuestions = document.querySelectorAll('.faq__question')
-faqQuestions.forEach((faqQuestion) => faqQuestion.addEventListener('click', (e) => {
-  faqQuestion.nextElementSibling.classList.toggle('faq__answer--toggle')
-}))
+document.querySelector('.faq__items').addEventListener('click', (event) => {
+  const element = event.target.closest('.faq__item')
+  if (element) {
+    element.lastElementChild.classList.toggle('faq__answer--toggle')
+  }
+})
