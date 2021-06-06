@@ -66,6 +66,9 @@ body {
 .input__empty{
   margin-top: 5px;
   color:#e74149;
+}
+
+.input__empty-hide{
   visibility: hidden;
 }
 

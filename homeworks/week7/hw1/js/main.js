@@ -14,9 +14,9 @@ document.querySelector('form').addEventListener('submit', (event) => {
 
     const emptyStyle = (isEmpty = true) => {
       if (isEmpty) {
-        inputBlock.lastElementChild.lastElementChild.style.visibility = 'visible'
+        inputBlock.querySelector('.input__empty').classList.remove('input__empty-hide')
       } else {
-        inputBlock.lastElementChild.lastElementChild.style.visibility = 'hidden'
+        inputBlock.querySelector('.input__empty').classList.add('input__empty-hide')
       }
     }
 
