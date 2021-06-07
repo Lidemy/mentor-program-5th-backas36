@@ -1,0 +1,130 @@
+body{
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(330deg, #264653, #2a9d8f);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: 'Poppins',
+  sans-serif;
+}
+.wrapper{
+  padding: 20px;
+  background-color: #f1faee;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  border-radius: 8px;
+  margin: 80px 15px;
+}
+.wrapper .title {
+  font-weight: 800;
+  text-align: center;
+  font-size: 2.5rem;
+  color: #264653;
+}
+form {
+  margin: 25px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2.5rem;
+}
+form input[type=text]{
+  border:1px solid rgba(0, 0, 0, 0.3);
+  height: 100%;
+  width: 80%;
+  border-radius: 4px;
+  padding:0px 10px;
+  font-size: 1.2rem;
+  box-sizing: border-box;
+  /*outline: none;*/
+  transform: all .3s;
+}
+form input[type=text]:hover {
+  border-color:#264653;
+}
+
+form .add-btn{
+  height: 100%;
+  width: 10%;
+  background-color: #264653;
+  color: #f1faee;
+  border: none;
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+form .add-btn:hover{
+  opacity: 1;
+}
+.todo-list ul {
+  margin: 0;
+  padding: 0;
+}
+.todo-list ul li{
+  display: flex;
+  height: 100%;
+  border-radius: 8px;
+  margin: 8px 0;
+  padding: 6px;
+  border: 1px solid #264653;
+  justify-content: flex-end;
+  align-items: center;
+  box-shadow: 0 1px 9px rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+  flex-wrap:wrap;
+}
+.todo-list ul li+li{
+  margin-top: 15px;
+}
+.todo-list span.todo-item{
+  color: #264653;
+  flex: 1;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  height: 35px;
+}
+.todo-list span.todo-item.completed {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+.completed-btn, .trash-btn{
+  background-color: #4F6A72;
+  color: #f1faee;
+  border: none;
+  padding: 0.3rem;
+  margin-left: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity .3s ease;
+  display: none;
+}
+.trash-btn {
+  background-color: #ca6702;
+  right: 2%;
+}
+.fa-check, .fa-trash{
+  pointer-events: none;
+}
+.completed-btn:hover,
+.trash-btn:hover{
+  opacity: 1;
+}
+.todo-list ul li:hover .completed-btn,
+.todo-list ul li:hover .trash-btn {
+  display: inline-block;
+}
+@media (max-width: 768px) {
+  form .add-btn{
+    width: 15%;
+  }
+  .completed-btn:hover,
+  .trash-btn:hover {
+    opacity: 1;
+  }
+}
