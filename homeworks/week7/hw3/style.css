@@ -9,7 +9,7 @@ body{
   sans-serif;
 }
 .wrapper{
-  padding: 20px 20px;
+  padding: 20px;
   background-color: #f1faee;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   width: 400px;
@@ -69,22 +69,24 @@ form .add-btn:hover{
   height: 100%;
   border-radius: 8px;
   margin: 8px 0;
-  padding: 10px;
+  padding: 6px;
   border: 1px solid #264653;
   justify-content: flex-end;
   align-items: center;
   box-shadow: 0 1px 9px rgba(0, 0, 0, 0.3);
   font-size: 1.2rem;
   flex-wrap:wrap;
-  
 }
 .todo-list ul li+li{
   margin-top: 15px;
 }
 .todo-list span.todo-item{
   color: #264653;
-  flex:1 ;
+  flex: 1;
   padding-left: 10px;
+  display: flex;
+  align-items: center;
+  height: 35px;
 }
 .todo-list span.todo-item.completed {
   opacity: 0.5;
@@ -117,7 +119,6 @@ form .add-btn:hover{
 .todo-list ul li:hover .trash-btn {
   display: inline-block;
 }
-
 @media (max-width: 768px) {
   form .add-btn{
     width: 15%;
