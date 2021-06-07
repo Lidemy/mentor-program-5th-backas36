@@ -22,25 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     return todos
   }
+
   function makeTodoElement(todoValue) {
     const todoLi = document.createElement('li')
-    const newTodo = document.createElement('span')
-    newTodo.textContent = todoValue
-    newTodo.classList.add('todo-item')
-    todoLi.appendChild(newTodo)
-
-    const completedBtn = document.createElement('button')
-    completedBtn.innerHTML = '<i class="fas fa-check "></i>'
-    completedBtn.classList.add('completed-btn')
-    todoLi.appendChild(completedBtn)
-
-    const trashBtn = document.createElement('button')
-    trashBtn.innerHTML = '<i class="fas fa-trash "></i>'
-    trashBtn.classList.add('trash-btn')
-    todoLi.appendChild(trashBtn)
-
+    todoLi.innerHTML = `<span class="todo-item">${todoValue}</span>
+        <button class="completed-btn"><i class="fas fa-check "></i></button>
+        <button class="trash-btn"><i class="fas fa-trash "></i></button>`
     todoListUl.appendChild(todoLi)
   }
+
   function addTodo(event) {
     event.preventDefault()
     const todoInput = document.querySelector('.todo-input')
@@ -52,10 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
     saveLocalTodos(todoInput.value)
     todoInput.value = ''
   }
+
   function saveLocalTodos(todo) {
     todos.push(todo)
     localStorage.setItem('todos', JSON.stringify(todos))
   }
+
   function todoStatus(event) {
     const item = event.target
     if (item.classList[0] === 'trash-btn') {
@@ -66,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
       item.previousElementSibling.classList.toggle('completed')
     }
   }
+
   function removeLocalTodos(todo) {
     const todoStr = todo.childNodes[0].textContent
     todos.splice(todos.indexOf(todoStr), 1)
