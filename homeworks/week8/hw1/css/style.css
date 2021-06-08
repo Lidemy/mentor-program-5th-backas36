@@ -1,0 +1,239 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  height:100vh;
+}
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
+/* ========== Navbar section ========== */
+.navbar {
+  box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+}
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.navbar .wrapper {
+  height: 108px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar__sitename {
+  font-size: 36px;
+  color: #489846;
+}
+
+.navbar__links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.navbar__links li {
+  border-radius: 8px;
+  font-size: 18px;
+  margin-left: 12px;
+  transition: background-color 0.5s;
+}
+.navbar__links li.active,
+.navbar__links li:hover {
+  background-color: #ff7286;
+}
+.navbar__links li.active a,
+.navbar__links li:hover a {
+  color: white;
+}
+.navbar__links li a {
+  padding: 12px 24px;
+  display: inline-block;
+  color: #484848;
+  text-decoration: none;
+}
+
+/* ========== lottery section ========== */
+.lottery {
+  background: url(../img/games-bn.png) center/cover no-repeat;
+  min-height: 700px;
+  position: relative;
+  padding-top: 55px;
+}
+.result__bg-first{
+  background: url(../img/first.jpeg) center/cover no-repeat;
+}
+.result__bg-second {
+  background: url(../img/second.jpeg) center/cover no-repeat;
+}
+.result__bg-third {
+  background: url(../img/third.jpeg) center/cover no-repeat;
+}
+.result__bg-none {
+  background: black;
+}
+.result__bg-first.lottery::after,
+.result__bg-second.lottery::after,
+.result__bg-third.lottery::after {
+  content: "";
+  background: rgba(255, 255, 255, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.lottery__infos{
+  margin: 0 auto;
+  max-width: 500px;
+  background-color: white;
+  position: relative;
+  z-index: 2;
+  border-radius:16px;
+  color: #322929;
+  padding: 40px 20px 24px 18px;
+}
+.infos__title{
+  color: #5ec1b6;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.infos__info {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid #cdcdcd;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+}
+.info__title{
+  width: 90px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.info__desc{
+  flex: 1;
+ padding:0 20px;
+  line-height:1.4em;
+}
+.lottery__btn{
+  max-width:300px ;
+  background-color: #e62a45;
+  color: white;
+  padding: 18px 0;
+  text-align: center;
+  border-radius:8px;
+  margin:0 auto;
+  cursor: pointer;
+  margin-top: 36px;
+  font-size: 20px;
+  transition:background-color .2s ease-in;
+}
+
+.lottery-hide{
+  display:none;
+}
+
+.lottery__result{
+  margin-top: 135px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.result__title{
+  font-size: 36px;
+  color: #292222;
+}
+.result__title-none{
+  color:white;
+}
+.result__btn{
+  max-width:300px;
+  background-color: #e62a45;
+  color: white;
+  padding: 18px 0;
+  text-align: center;
+  border-radius:8px;
+  margin:0 auto;
+  cursor: pointer;
+  margin-top: 36px;
+  font-size: 20px;
+  transition:background-color .2s ease-in;
+}
+.result__btn:hover,
+.lottery__btn:hover {
+  background-color: #ff7286;
+}
+/* ========== footer section ========== */
+
+.footer__top {
+  background-color: #e8efee;
+  color: #484848;
+  padding: 35px 0;
+  font-size: 14px;
+}
+.footer__top-flex {
+  display: flex;
+  justify-content: space-between;
+}
+.footer__top-site-name {
+  font-size: 36px;
+  color: #489846;
+  
+}
+.footer__top-shofinfo {
+  margin-right: 20px;
+}
+.footer__top-shopinfo div + div {
+  margin-top: 15px;
+}
+.footer__bottm {
+  color: white;
+  background-color: #35564b;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0;
+  }
+  .navbar .wrapper {
+    height: 130px;
+    flex-direction: column;
+    padding: 0;
+  }
+  .navbar__sitename {
+    margin-top: 18px;
+  }
+  .navbar__links {
+    width: 100%;
+  }
+  .navbar__links li {
+    flex: 1;
+    border-radius: 0;
+    margin-left: 0;
+    text-align: center;
+  }
+}
+@media (max-width: 575px) {
+  .lottery{
+    padding: 30px 10px;
+  }
+  .footer__top-flex {
+    flex-direction: column-reverse;
+  }
+  .footer__top-shopfinfo {
+    margin-right: 0;
+    margin-top: 20px;
+  }
+}
