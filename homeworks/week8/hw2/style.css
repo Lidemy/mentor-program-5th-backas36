@@ -1,0 +1,224 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  font-family: 'Oswald',
+  sans-serif;
+  background-image: linear-gradient(180deg, #343641, #2d517d);
+}
+main{
+  min-height: 100vh;
+}
+/* ===================================== header ===================================== */
+header{
+  background-color: #343641;
+  box-shadow: 0px 0px 5px #343641;
+}
+header .wrapper{
+  color: #FEFFFF;
+  position: relative;
+}
+.logo{
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.menu_active {
+  display: none;
+}
+
+nav ul{
+  background:#3a3c46;
+  box-shadow: 0px 0px 5px #494b52;
+}
+
+.menu__item{
+  text-align: center;
+  cursor: pointer;
+  padding: 16px;
+}
+.menu__item.link--active{
+  color: #FF5E3C;
+}
+.toggle__menu{
+  width: 30px;
+  height: 30px;
+  /*background-color: #ccc;*/
+  display:inline-block;
+  position: absolute;
+  top: 8px;
+  right:8px;
+  cursor: pointer;
+}
+.toggle__menu::before{
+  content:"";
+  position: absolute;
+  background-color: #FEFFFF;
+  height: 3px;
+  width: 26px;
+  top: 0;
+  left:2px;
+  bottom: 0;
+  margin: auto;
+  box-shadow: 0px 8px 0px #FEFFFF,
+  0px -8px 0px #FEFFFF;
+}
+
+
+/* ===================================== main ===================================== */
+main .wrapper{
+  padding: 8px;
+}
+.game__title{
+  font-size: 36px;
+  color: #FEFFFF;
+  text-align:center;
+  margin-top: 12px;
+}
+.game__desc{
+  color: #FEFFFF;
+  text-align:center;
+  margin: 16px auto;
+}
+
+.stream{
+  display:flex;
+  flex-direction: column;
+  border: 2px solid #343641;
+  margin-top: 8px;
+  box-shadow: 0px 0px 5px #343641;
+}
+.stream__body {
+  display: flex;
+  padding: 12px 8px;
+  background-color: #27292D;
+  flex: 1;
+  align-items: flex-start;
+}
+.stream img{
+  width: 100%;
+  vertical-align: middle;
+}
+
+.stream__logo{
+  margin-right: 12px;
+  width: 20%;
+}
+.stream__logo img{
+  border-radius: 50%;
+}
+.stream__info{
+  width: 80%;
+  color: #FEFFFF;
+}
+.stream__status {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 20px;
+  padding-top: 8px;
+}
+.stream__name{
+  font-size: 16px;
+  padding-top: 10px;
+}
+
+/* ===================================== footer ===================================== */
+footer{
+  background-color: #343641;
+  height:40px;
+}
+.copyright{
+  line-height:40px;
+  font-size: 18px;
+  padding: 12px 0;
+  text-align: center;
+  color:#FEFFFF;
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper{
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  header{
+    height:80px;
+  }
+  header .wrapper{
+  
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    height: 80px;
+  }
+  .logo{
+    font-size: 36px;
+  }
+  .toggle__menu{
+    display: none;
+  }
+  nav ul{
+    background:none;
+    box-shadow: none;
+  }
+  .nav__menu {
+    display:flex;
+    justify-content:flex-end;
+    font-size: 20px;
+    align-items: center;
+  }
+  .nav__menu li.menu__item{
+    margin-left:18px;
+    position: relative;
+    transform: translateY(0);
+    transition: 0.2s;
+  }
+  .link--active::after,
+  .nav__menu li.menu__item::after{
+    content:"";
+    position: absolute;
+    border-bottom: 3px solid #FF5E3C;
+    left: 50%;
+    right: 50%;
+    bottom:0px;
+    transition:0.2s;
+  }
+  .nav__menu li.menu__item.link--active::after,
+  .nav__menu li.menu__item:hover::after{
+      left: 0;
+      right: 0;
+      color: #FF5E3C;
+  }
+  .nav__menu li.menu__item:hover {
+      transform:translateY(-4px);
+  }
+  main .wrapper{
+    max-width: 960px;
+  }
+  .game__title{
+    font-size: 48px;
+  }
+  .game__desc{
+    font-size: 24px;
+  }
+  .streams{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .stream{
+    width: 310px;
+    transition: 0.2s;
+    opacity: 0.6;
+  }
+  .stream:hover{
+    transform: scale(1.03);
+    opacity: 1;
+  }
+  .stream--empty{
+    width: 310px;
+  }
+}
