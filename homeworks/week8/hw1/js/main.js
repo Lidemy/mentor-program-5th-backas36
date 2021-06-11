@@ -19,16 +19,21 @@ const prizes = {
   }
 }
 
-document.querySelector('.lottery__btn').addEventListener('click', () => {
+const getPrizeCb = () => {
+  document.querySelector('.lottery__btn').removeEventListener('click', getPrizeCb)
   getPrize((error, data) => {
     if (error) {
       alert(errorMsg)
       return
     }
     const { className, title } = prizes[data.prize]
+    document.querySelector('.lottery__btn').addEventListener('click', getPrizeCb)
+
     showPrize(className, title)
   })
-})
+}
+
+document.querySelector('.lottery__btn').addEventListener('click', getPrizeCb)
 const getPrize = (callback) => {
   const prizeRequest = new XMLHttpRequest()
   prizeRequest.open('GET', prizeAPI, true)
