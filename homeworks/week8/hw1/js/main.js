@@ -22,12 +22,12 @@ const prizes = {
 const getPrizeCb = () => {
   document.querySelector('.lottery__btn').removeEventListener('click', getPrizeCb)
   getPrize((error, data) => {
+    document.querySelector('.lottery__btn').addEventListener('click', getPrizeCb)
     if (error) {
       alert(errorMsg)
       return
     }
     const { className, title } = prizes[data.prize]
-    document.querySelector('.lottery__btn').addEventListener('click', getPrizeCb)
 
     showPrize(className, title)
   })
