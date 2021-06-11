@@ -24,6 +24,7 @@ header .wrapper{
   font-size: 24px;
   cursor: pointer;
   padding: 8px;
+  display:inline-block;
 }
 
 .menu_active {
