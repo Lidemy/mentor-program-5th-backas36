@@ -1,0 +1,139 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  background:#f4f3df;
+}
+.header__warning{
+  background:#FED9B7;
+  color: #f0564a;
+  font-weight: bold;
+  padding: 20px;
+  text-align: center;
+}
+.board{
+  background-color: #FDFCDC;
+  width: 100%;
+  max-width: 700px;
+  margin:20px auto;
+  padding:  30px;
+  border-radius: 8px;
+  box-shadow:4px 4px 8px #a5a59a;
+}
+.board__header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.board_title{
+  font-size: 32px;
+  font-weight: bold;
+  color: #0081A7;
+}
+.board__btn{
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color:#ffffff;
+  font-size: 16px;
+  background-color: #0081A7;
+  border-radius: 25px;
+  opacity:0.8;
+  transition:.3s;
+}
+.board__btn-submit:hover,
+.board__btn:hover{
+  opacity:1;
+}
+
+.board__form-edit textarea {
+  margin-top: 20px;
+  width: 100%;
+  border: 1px solid #0081A7;
+  background: #FDFCDC;
+  padding: 20px;
+  border-radius:8px;
+  font-size: 18px; 
+  color: #a5a59a;
+}
+.board__submit{
+  text-align: right;
+  margin:10px auto 20px;
+}
+.board__btn-submit{
+  border: none;
+  padding: 6px 20px;
+  color:#f4f3df;
+  font-size: 16px;
+  background-color: #0081A7;
+  border-radius: 25px;
+  opacity:0.8;
+  transition:.3s;
+  cursor: pointer;
+}
+.comment__warning{
+  margin-top: 20px;
+  text-align:center;
+  color: #f0564a;
+  font-weight: bold;
+  letter-spacing: 0.5rem;
+}
+.board__hr{
+  height: 2px;
+  background-color: #e8e8e8;
+  width: 95%;
+  margin: 0 auto;
+}
+.board_comments{
+  margin-top: 20px;
+}
+
+.board__comment{
+  display:flex;
+  min-height: 70px;
+  margin: 34px 0;
+}
+.comment__avatar{
+  min-width: 50px;
+  height: 50px;
+  background:#72b8bb;
+  border-radius: 50%;
+}
+.comment__body{
+  margin-left: 10px;
+}
+
+.comment__author{
+  color: #0081A7;
+  font-size: 20px;
+}
+.comment__time{
+  color: #a0a0a0;
+}
+.comment__content{
+  margin-top: 4px;
+  max-width: 100%;
+  white-space: pre-line;
+  word-break: break-word;
+  color:#41413f;
+}
+
+/* register page */
+.board__form-register span{
+  color: #0081A7;
+  font-size: 20px;
+  font-weight: bold;
+}
+.board__form-register .board__submit{
+  text-align: left;
+  margin-top: 20px;
+}
+.board__form-register input:not([type=submit]){
+  margin-top: 20px;
+  border: 1px solid #0081A7;
+  background: #FDFCDC;
+  padding: 8px;
+  border-radius:8px;
+  font-size: 18px;
+  color: #a5a59a;
+}
