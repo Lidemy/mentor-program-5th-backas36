@@ -10,7 +10,10 @@
     die();
   }
 
-  $sql = sprintf('INSERT INTO yang36_users(nickname, username, password) VALUES ("%s","%s","%s")', $nickname, $username, $password);
+  $sql = sprintf('INSERT INTO yang36_users(nickname, username, password) VALUES ("%s","%s","%s")', 
+  $nickname, 
+  $username, 
+  $password);
 
   $result = $conn->query($sql);
 

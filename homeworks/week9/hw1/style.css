@@ -55,6 +55,7 @@ body{
   border-radius:8px;
   font-size: 18px; 
   color: #a5a59a;
+  resize: none;
 }
 .board__submit{
   text-align: right;
