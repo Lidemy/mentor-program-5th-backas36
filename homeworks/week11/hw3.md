@@ -3,7 +3,11 @@
 密碼如果直接以明碼方式儲存，很容易因為該網站的資料庫被侵入後，密碼一覽無遺的輕鬆被拿到，所以密碼以雜湊方式儲存後，如果不小心該網站資料庫被侵入，會比較不容易被破解。
 
 ## `include`、`require`、`include_once`、`require_once` 的差別
+include 會將指定的檔案讀入並且執行程式， include_once 幾乎與 include 相同，但是 include_once 會先檢查要匯入的檔案是不是已經在該程式中被匯入過了，這樣可以避免一些自行定義好的函示被重複宣告。
 
+require 與 include 區別是 ， 當 include 導入程式時發生錯誤的話，會繼續執行；然而 require 會停止執行。
+
+至於 require 和 require_once，就跟 include 與 include_once 的區分一樣， require 如果文件中的程式已經被匯入過了 require_once 就不會再匯入。
 
 ## 請說明 SQL Injection 的攻擊原理以及防範方法
 SQL Injection 是有心人士利用像是 html 的 input 中輸入 SQL 語法，以此方式竄改你後端的 SQL 語法，例如像課程中範例的留言板，利用註解方式，把原本 SQL WHERE 的條件給註解掉，然後輸入可以輕易登入資料庫的 query ，這樣就可以完成非法登入！就像以類似斷章取義的方式，就輕易地完成 query，成功非法登入。
