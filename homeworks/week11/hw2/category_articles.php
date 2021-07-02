@@ -1,13 +1,13 @@
 <?php
-  if(empty($_GET['category_id'])||
-     empty($_GET['article_id'])){
+  if(empty($_GET['category_id'])){
     header('Location:index.php');
     exit;
   }
 $category_id = $_GET['category_id'];
-$article_id = $_GET['article_id'];
 
-  include('./header.php');
+
+
+include('./header.php');
   include('./banner.php');
 ?>
 
@@ -16,7 +16,7 @@ $article_id = $_GET['article_id'];
      <ol class="breadcrumb">
           <li><a href="index.php">首頁</a></li>
 
-          <li><a href="category_articles.php?category_id=<?php echo escape($category_id)?>.'&article_id='.<?php echo escape($article_id)?>" class="active"><?php echo getCategoryFromId($category_id)?></a></li>
+          <li><a href="category_articles.php?category_id=<?php echo escape($category_id)?>" class="active"><?php echo getCategoryFromId($category_id)?></a></li>
       </ol>
     <div class="wrapper">
       <div class="articles">
