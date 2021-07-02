@@ -7,7 +7,7 @@
             <h2>關於我</h2>
           </div>
           <div class="about__avata">
-            <img src="https://picsum.photos/200/200/?random=1">
+            <img src="./images/avatar.jpg">
           </div>
           <div class="about__info">
             <p>切版花了我好久的時間，但是我沒辦法丟下他不管！對不起，Huli，雖然你說先不用管切版！功能做出來比較重要 😖</p>

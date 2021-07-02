@@ -10,7 +10,7 @@
     $username = $_SESSION['username'];
     $user = getUserFromUsername($username);
   }
-
+  
 
 ?>
   <!DOCTYPE html>
@@ -70,9 +70,9 @@
             <?php if(!$username){ ?>
               <a href="login.php">登入</a></li>
             <?php } else if ($user && $user['role'] === 'admin') { ?>
-              <div class="user__nickname"><?php echo escape($user['nickname'])?>，你好</div>
+              <div class="user__nickname"><?php echo escape($user['nickname'])?>管理員，你好</div>
+              <a href="admin.php" >後台首頁</a>
               <a href="add_article.php" >新增文章</a>
-              <a href="categories.php" >分類管理</a>
               <a href="handle_logout.php">登出</a>
             <?php } else { ?>
               <div class="user__nickname"><?php echo escape($user['nickname'])?>，你好</div>

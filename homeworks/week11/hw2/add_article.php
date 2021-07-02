@@ -67,9 +67,7 @@
             </div>
             <div class="article__body">
               <div class="title">文章內容：</div>
-              <textarea name="article_content"  cols="60" rows="30">
-                
-              </textarea>
+              <textarea name="article_content"  cols="60" rows="30"></textarea>
             </div>
            
           </div>
