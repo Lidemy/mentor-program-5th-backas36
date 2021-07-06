@@ -123,8 +123,8 @@
             </span>
             <span class="comment__time"><?php echo escape($row['created_at']); ?></span>
             <?php if(hasPermission($user,'update',$row)){ ?>
-              <a href="update_comment.php?id=<?php echo $row['id']?>">編輯</a>
-              <a href="delete_comment.php?id=<?php echo $row['id']?>">刪除</a>
+              <a href="update_comment.php?id=<?php echo escpae($row['id'])?>">編輯</a>
+              <a href="delete_comment.php?id=<?php echo escape($row['id'])?>">刪除</a>
             <?php } ?>
           </div>
           <div class="comment__content"><?php echo escape($row['content']); ?></div>
@@ -145,8 +145,8 @@
       $total_page = ceil($row['count'] / $item_per_page);
     ?>
     <div class="page-info">
-      <span>總共有 <?php echo $row['count'] ?> 筆留言， 頁數：</span>
-      <span><?php echo $page ?> / <?php echo $total_page?></span>
+      <span>總共有 <?php echo escape($row['count']) ?> 筆留言， 頁數：</span>
+      <span><?php echo escape($page) ?> / <?php echo escape($total_page)?></span>
     </div>
     <div class="paginator">
       <?php if($page !=1) { ?>
