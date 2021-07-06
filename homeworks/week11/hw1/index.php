@@ -1,4 +1,4 @@
-<!-- 網址在這 http://mentor-program.co/mtr04group5/yang36/week11_hw1/index.php -->
+<!-- 網址在這 http://mentor-program.co/mtr04group5/yang36/week9_hw1/index.php -->
 <?php
   session_start();
   require_once('./conn.php');
@@ -123,8 +123,8 @@
             </span>
             <span class="comment__time"><?php echo escape($row['created_at']); ?></span>
             <?php if(hasPermission($user,'update',$row)){ ?>
-              <a href="update_comment.php?id=<?php echo escpae($row['id'])?>">編輯</a>
-              <a href="delete_comment.php?id=<?php echo escape($row['id'])?>">刪除</a>
+              <a href="update_comment.php?id=<?php echo $row['id']?>">編輯</a>
+              <a href="delete_comment.php?id=<?php echo $row['id']?>">刪除</a>
             <?php } ?>
           </div>
           <div class="comment__content"><?php echo escape($row['content']); ?></div>
@@ -151,11 +151,11 @@
     <div class="paginator">
       <?php if($page !=1) { ?>
       <a href="index.php?page=1">首頁</a>
-      <a href="index.php?page=<?php echo $page -1 ?>"> << </a>
+      <a href="index.php?page=<?php echo escape($page -1) ?>"> << </a>
       <?php } ?>
       <?php if($page != $total_page) { ?>
-      <a href="index.php?page=<?php echo $page +1 ?>"> >> </a>
-      <a href="index.php?page=<?php echo $total_page ?>">最末頁</a>
+      <a href="index.php?page=<?php echo escape($page + 1) ?>"> >> </a>
+      <a href="index.php?page=<?php echo escape($total_page) ?>">最末頁</a>
       <?php } ?>
     </div>
   </main>
