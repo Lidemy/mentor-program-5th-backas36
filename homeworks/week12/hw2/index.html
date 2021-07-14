@@ -1,3 +1,4 @@
+<!-- 網址在這 http://mentor-program.co/mtr04group5/yang36/week12_hw2/index.html -->
 <!DOCTYPE html>
 <html>
 
@@ -106,14 +107,11 @@
 
       // getTodos from Server
       if (todosId) {
-        $.getJSON(`http://localhost:8888/todoListV2/get_todos.php?todosId=${todosId}`, (response) => {
+        $.getJSON(`./get_todos.php?todosId=${todosId}`, (response) => {
           todos = JSON.parse(response.data.todos)
           renderTodos(todos, todosAction)
         }
         )
-      } else {
-        renderTodos(todos, todosAction)
-        //測試用記得刪掉
       }
 
       //save todos to Server
@@ -121,7 +119,7 @@
         let todosJson = JSON.stringify(todos)
         $.ajax({
           type: 'POST',
-          url: `http://localhost:8888/todoListV2/add_todos.php`,
+          url: `./add_todos.php`,
           data: { todos: todosJson },
           success: function (response) {
             if (!response.ok) {
@@ -131,7 +129,7 @@
             window.location = `index.html?todosId=${todosId}`
           },
           error: function (error) {
-            alert(error)
+            alert('something wrong OMG')
           }
         })
       })
@@ -236,7 +234,7 @@
     </nav>
   </header>
   <main class="container nt-5 px-3">
-    <div class="card border-secondary mb-3 shadow">
+    <div class="card border-secondary my-5 shadow">
       <div class="col p-4 card-header">
         <form class="input-group ">
           <input type="text" class="form-control fs-5" placeholder="Add Todo task here." aria-label="Add Todo task"

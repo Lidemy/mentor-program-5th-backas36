@@ -1,3 +1,4 @@
+<!-- 網址在這 http://mentor-program.co/mtr04group5/yang36/week12_hw1/index.html -->
 <!DOCTYPE html>
 <html>
 
@@ -41,7 +42,7 @@
       }
 
       const getCommentsAPI = (requestData, callback) => {
-        const url = `http://localhost:8888/api_board/api_comments.php?site_key=${requestData.site_key}&before=${requestData.before}`
+        const url = `./api_comments.php?site_key=${requestData.site_key}&before=${requestData.before}`
         $.ajax({
           type: 'GET',
           url,
@@ -61,7 +62,7 @@
       const addCommentAPI = (newCommentData, callback) => {
         $.ajax({
           type: 'POST',
-          url: 'http://localhost:8888/api_board/api_add_comments.php',
+          url: './api_add_comments.php',
           data: newCommentData,
           success: function (response) {
             if (!response.ok) {

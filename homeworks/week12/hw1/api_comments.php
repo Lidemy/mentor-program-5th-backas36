@@ -18,7 +18,7 @@
   
   $site_key = $_GET['site_key'];
   $before = $_GET['before'];
-
+  
   $sql = 'SELECT id, nickname, content, created_at '.
          'FROM yang36_discussions WHERE site_key = ? '.
          'AND is_deleted = 0'.
