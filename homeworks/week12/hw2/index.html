@@ -75,17 +75,18 @@
         </li>`
       }
 
-      const renderTodos = (todos, todosAction) => {
+      const renderTodos = (todosAction) => {
         todosDOM.empty()
+        let resultTodos = todos
         if (todosAction === 'incompletedList') {
-          todos = todos.filter(todo => !todo.isCompleted)
+          resultTodos = resultTodos.filter(todo => !todo.isCompleted)
         }
 
         if (todosAction === 'completedList') {
-          todos = todos.filter(todo => todo.isCompleted)
+          resultTodos = resultTodos.filter(todo => todo.isCompleted)
         }
 
-        todos.forEach(todo => {
+        resultTodos.forEach(todo => {
           let todoTemplate = makeTodoTemplate(todo)
           todosDOM.append(todoTemplate)
         })
@@ -109,7 +110,7 @@
       if (todosId) {
         $.getJSON(`./get_todos.php?todosId=${todosId}`, (response) => {
           todos = JSON.parse(response.data.todos)
-          renderTodos(todos, todosAction)
+          renderTodos(todosAction)
         }
         )
       }
@@ -151,7 +152,7 @@
         $('.form-check-input')[0].checked = true
         todosAction = $('input[name=todosAction]:checked').val()
 
-        renderTodos(todos, todosAction)
+        renderTodos(todosAction)
 
         $('#input-newTodo').val('')
       })
@@ -166,7 +167,7 @@
         const todoSelectedIndex = todos.findIndex(todo => todo.todoId === String(todoContentSpan.data('todo-id')))
         if (todoAction.hasClass('btn-deleted')) {
           todos = deleteList([todoSelectedIndex])
-          renderTodos(todos, todosAction)
+          renderTodos(todosAction)
         }
         if (todoAction.hasClass('btn-completed')) {
           if (todos[todoSelectedIndex].isCompleted) {
@@ -174,7 +175,7 @@
           } else {
             todos[todoSelectedIndex].isCompleted = true
           }
-          renderTodos(todos, todosAction)
+          renderTodos(todosAction)
         }
 
         if (todoAction.hasClass('btn-edit')) {
@@ -187,7 +188,7 @@
           todoContentInput.change(e => {
             let newTodoValue = e.target.value
             todos[todoSelectedIndex].content = newTodoValue
-            renderTodos(todos, todosAction)
+            renderTodos(todosAction)
           })
 
         }
@@ -196,14 +197,13 @@
       // todos Action
       $('.form-check-input').change((e) => {
         todosAction = $('input[name=todosAction]:checked').val()
-
-        renderTodos(todos, todosAction)
+        renderTodos(todosAction)
       })
 
       // clean all todo
       $('.btn-clean').on('click', (e) => {
         todos = []
-        renderTodos(todos, todosAction)
+        renderTodos(todosAction)
       })
 
       // clean completed todo
@@ -218,7 +218,7 @@
           fromIndex = fromIndex + 1
         }
         deleteList(completedIndexArr)
-        renderTodos(todos, todosAction)
+        renderTodos(todosAction)
       })
 
     })
@@ -230,7 +230,7 @@
 <body>
   <header class="shadow-sm">
     <nav class="navbar navbar-light bg-light justify-content-center">
-      <span class="navbar-brand mb-0 h1">Tolist v2</span>
+      <span class="navbar-brand mb-0 h1">Tolist</span>
     </nav>
   </header>
   <main class="container nt-5 px-3">
