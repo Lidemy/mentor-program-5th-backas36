@@ -42,16 +42,6 @@ navMenu.addEventListener('click', (event) => {
   }
 })
 
-const renderNavbar = (topGames) => {
-  topGames.forEach((topGame) => {
-    const element = document.createElement('li')
-    element.classList.add('menu_item')
-    element.textContent = topGame.game.name
-    navMenu.appendChild(element)
-  })
-  renderStreamsCards(topGames[0].game.name)
-}
-
 const getTopGamesFromServer = async() => {
   const endPoint = '/games/top?limit=5'
   const API_URL = 'https://api.twitch.tv/kraken'
@@ -70,6 +60,47 @@ const getTopGamesFromServer = async() => {
   }
   const data = await response.json()
   return data
+}
+
+getTopGamesFromServer()
+  .then((data) => {
+    const topGames = data.top
+    renderNavbar(topGames)
+  })
+  .catch((error) => {
+    alert(`errMsg : ${error.message}`)
+  })
+
+const renderNavbar = (topGames) => {
+  topGames.forEach((topGame) => {
+    const element = document.createElement('li')
+    element.classList.add('menu__item')
+    element.textContent = topGame.game.name
+    navMenu.appendChild(element)
+  })
+  renderStreamsCards(topGames[0].game.name)
+}
+
+const renderStreamsCards = (gameName) => {
+  document.querySelector('.game__title').textContent = gameName
+  document.querySelector('.streams').innerHTML = ''
+
+  getStreamsFromServer(gameName)
+    .then((data) => {
+      const { streams } = data
+      streams.forEach((stream) => appendStream(stream))
+      appendEmpty()
+      appendEmpty()
+      navMenu.querySelectorAll('li').forEach((li) => {
+        li.classList.remove('link--active')
+        if (li.textContent === gameName) {
+          li.classList.add('link--active')
+        }
+      })
+    })
+    .catch((error) => {
+      alert(`errMsg :${error.message}`)
+    })
 }
 
 const getStreamsFromServer = async(gameName) => {
@@ -94,15 +125,6 @@ const getStreamsFromServer = async(gameName) => {
   return data
 }
 
-getTopGamesFromServer()
-  .then((data) => {
-    const topGames = data.top
-    renderNavbar(topGames)
-  })
-  .catch((error) => {
-    alert(`errMsg : ${error.message}`)
-  })
-
 const appendEmpty = () => {
   const element = document.createElement('div')
   element.classList.add('stream--empty')
@@ -116,26 +138,4 @@ const appendStream = (stream) => {
     .replace('$logo', stream.channel.logo)
     .replace('$status', stream.channel.status)
     .replace('$display_name', stream.channel.display_name)
-}
-
-const renderStreamsCards = (gameName) => {
-  document.querySelector('.game__title').textContent = gameName
-  document.querySelector('.streams').innerHTML = ''
-
-  getStreamsFromServer(gameName)
-    .then((data) => {
-      const { streams } = data
-      streams.forEach((stream) => appendStream(stream))
-      appendEmpty()
-      appendEmpty()
-      navMenu.querySelectorAll('li').forEach((li) => {
-        li.classList.remove('link--active')
-        if (li.textContent === gameName) {
-          li.classList.add('link--active')
-        }
-      })
-    })
-    .catch((error) => {
-      alert(`errMsg :${error.message}`)
-    })
 }
