@@ -3,7 +3,7 @@ const navMenu = document.querySelector('.nav__menu')
 const toggleMenu = document.querySelector('.toggle__menu')
 const logo = document.querySelector('.logo')
 
-const errMsg = `Server have something wrong ...,
+const errMsg = `Opps, There have something wrong ...,
 plz try later`
 
 const STREAM_TEMPLATE = `<div class="stream">
@@ -29,48 +29,19 @@ const STREAM_TEMPLATE = `<div class="stream">
 toggleMenu.addEventListener('click', () => {
   navMenu.classList.toggle('menu_active')
 })
+
 logo.addEventListener('click', () => {
   const gameName = navMenu.querySelector('li').textContent
   renderStreamsCards(gameName)
 })
+
 navMenu.addEventListener('click', (event) => {
   if (event.target.tagName.toLowerCase() === 'li') {
     const gameName = event.target.textContent
     renderStreamsCards(gameName)
   }
 })
-const setRequest = (endPoint, callback) => {
-  const request = new XMLHttpRequest()
-  const API_URL = 'https://api.twitch.tv/kraken'
-  const CLIENT_ID = 'tm4ra1rlrgu90xwmddp165gfvyzawy'
-  const ACCEPT = 'application/vnd.twitchtv.v5+json'
 
-  request.open('GET', API_URL + endPoint, true)
-  request.setRequestHeader('Client-ID', CLIENT_ID)
-  request.setRequestHeader('Accept', ACCEPT)
-  request.onload = function() {
-    if (this.status >= 200 && this.status < 400) {
-      let data
-      try {
-        data = JSON.parse(this.response)
-        if (!data) {
-          alert(errMsg)
-          return
-        }
-      } catch (error) {
-        alert(errMsg)
-        return
-      }
-      callback(undefined, data)
-    } else {
-      alert(errMsg)
-    }
-  }
-  request.onerror = function() {
-    alert(errMsg)
-  }
-  request.send()
-}
 const renderNavbar = (topGames) => {
   topGames.forEach((topGame) => {
     const element = document.createElement('li')
@@ -95,8 +66,30 @@ const getTopGamesFromServer = async() => {
     })
   })
   if (response.status !== 200) {
-    throw new Error('resource API something wron.. QQ')
+    throw new Error(errMsg)
   }
+  const data = await response.json()
+  return data
+}
+
+const getStreamsFromServer = async(gameName) => {
+  const endPoint = `/streams/?game=${encodeURIComponent(gameName)}&limit=20`
+  const API_URL = 'https://api.twitch.tv/kraken'
+  const CLIENT_ID = 'tm4ra1rlrgu90xwmddp165gfvyzawy'
+  const ACCEPT = 'application/vnd.twitchtv.v5+json'
+
+  const response = await fetch(API_URL + endPoint, {
+    method: 'GET',
+    headers: new Headers({
+      'Client-ID': CLIENT_ID,
+      Accept: ACCEPT
+    })
+  })
+
+  if (response.status !== 200) {
+    throw new Error(errMsg)
+  }
+
   const data = await response.json()
   return data
 }
@@ -107,13 +100,8 @@ getTopGamesFromServer()
     renderNavbar(topGames)
   })
   .catch((error) => {
-    alert(`something wrong... ${error.message}`)
+    alert(`errMsg : ${error.message}`)
   })
-
-const getStreams = (gameName, callback) => {
-  const endPoint = `/streams/?game=${encodeURIComponent(gameName)}&limit=20`
-  setRequest(endPoint, callback)
-}
 
 const appendEmpty = () => {
   const element = document.createElement('div')
@@ -133,18 +121,21 @@ const appendStream = (stream) => {
 const renderStreamsCards = (gameName) => {
   document.querySelector('.game__title').textContent = gameName
   document.querySelector('.streams').innerHTML = ''
-  getStreams(gameName, (error, streams) => {
-    if (error) {
-      alert(errMsg)
-    }
-    streams.streams.forEach((stream) => appendStream(stream))
-    appendEmpty()
-    appendEmpty()
-    navMenu.querySelectorAll('li').forEach((li) => {
-      li.classList.remove('link--active')
-      if (li.textContent === gameName) {
-        li.classList.add('link--active')
-      }
+
+  getStreamsFromServer(gameName)
+    .then((data) => {
+      const { streams } = data
+      streams.forEach((stream) => appendStream(stream))
+      appendEmpty()
+      appendEmpty()
+      navMenu.querySelectorAll('li').forEach((li) => {
+        li.classList.remove('link--active')
+        if (li.textContent === gameName) {
+          li.classList.add('link--active')
+        }
+      })
     })
-  })
+    .catch((error) => {
+      alert(`errMsg :${error.message}`)
+    })
 }
