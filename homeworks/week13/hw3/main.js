@@ -71,10 +71,44 @@ const setRequest = (endPoint, callback) => {
   }
   request.send()
 }
-const getTopGames = (callback) => {
-  const endPoint = '/games/top?limit=5'
-  setRequest(endPoint, callback)
+const renderNavbar = (topGames) => {
+  topGames.forEach((topGame) => {
+    const element = document.createElement('li')
+    element.classList.add('menu_item')
+    element.textContent = topGame.game.name
+    navMenu.appendChild(element)
+  })
+  renderStreamsCards(topGames[0].game.name)
 }
+
+const getTopGamesFromServer = async() => {
+  const endPoint = '/games/top?limit=5'
+  const API_URL = 'https://api.twitch.tv/kraken'
+  const CLIENT_ID = 'tm4ra1rlrgu90xwmddp165gfvyzawy'
+  const ACCEPT = 'application/vnd.twitchtv.v5+json'
+
+  const response = await fetch(API_URL + endPoint, {
+    method: 'GET',
+    headers: new Headers({
+      'Client-ID': CLIENT_ID,
+      Accept: ACCEPT
+    })
+  })
+  if (response.status !== 200) {
+    throw new Error('resource API something wron.. QQ')
+  }
+  const data = await response.json()
+  return data
+}
+
+getTopGamesFromServer()
+  .then((data) => {
+    const topGames = data.top
+    renderNavbar(topGames)
+  })
+  .catch((error) => {
+    alert(`something wrong... ${error.message}`)
+  })
 
 const getStreams = (gameName, callback) => {
   const endPoint = `/streams/?game=${encodeURIComponent(gameName)}&limit=20`
@@ -114,17 +148,3 @@ const renderStreamsCards = (gameName) => {
     })
   })
 }
-
-// render navbar menu
-getTopGames((error, topGames) => {
-  if (error) {
-    alert(error)
-  }
-  topGames.top.forEach((topGame) => {
-    const element = document.createElement('li')
-    element.classList.add('menu__item')
-    element.textContent = topGame.game.name
-    navMenu.appendChild(element)
-  })
-  renderStreamsCards(topGames.top[0].game.name)
-})
