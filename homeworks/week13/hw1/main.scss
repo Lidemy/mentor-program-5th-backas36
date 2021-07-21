@@ -1,0 +1,661 @@
+// variable
+$bg-color: #e6ccb2;
+$title-color: #ede0d4;
+$main-color: #7f5539;
+$text-color: #fff;
+
+// extend
+%btn-style1 {
+  display: inline-block;
+  text-decoration: none;
+}
+%text-nowrap {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+%text-cut {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+// mixin
+@mixin transition($property, $sec) {
+  transition: #{$property} $sec;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  width: 100%;
+}
+.btn {
+  &-link {
+    @extend %btn-style1;
+    @include transition(background, 0.3s);
+    background-color: $bg-color;
+    color: $text-color;
+    border-radius: 6px;
+    padding: 6px 12px;
+
+    &:hover {
+      background-color: $main-color;
+    }
+  }
+  &-article {
+    @extend %btn-style1;
+    color: #b08968;
+    font-size: 18px;
+  }
+  &-submit {
+    background-color: $bg-color;
+    color: $text-color;
+    border: none;
+    padding: 8px 24px;
+    @include transition(background, 0.3s);
+
+    font-size: 18px;
+  }
+  &-light {
+    @extend %btn-style1;
+    margin-top: 12px;
+    color: $main-color;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+#menu-control {
+  position: absolute;
+  z-index: -2;
+  opacity: 0;
+  &:checked ~ nav ul {
+    left: 0;
+    z-index: 4;
+  }
+}
+
+header {
+  width: 100%;
+  min-height: 50px;
+  background-color: $bg-color;
+  position: relative;
+}
+
+.logo {
+  line-height: 50px;
+  font-weight: 900;
+  margin-left: 10px;
+
+  a {
+    font-size: 18px;
+    text-decoration: none;
+    color: $text-color;
+  }
+}
+
+.hamburger {
+  font-size: 28px;
+  color: $text-color;
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+nav ul {
+  width: 80%;
+  background-color: $bg-color;
+  position: absolute;
+  top: 50px;
+  left: -100%;
+  @include transition(all, 0.5s);
+  padding: 12px 16px 20px;
+  opacity: 0.9;
+
+  li {
+    line-height: 50px;
+    a,
+    a:visited {
+      color: $text-color;
+      font-size: 18px;
+      text-decoration: none;
+      font-weight: bold;
+
+      display: block;
+      padding: 0 10px;
+      border-bottom: 0.1em solid $main-color;
+    }
+    a {
+      &.item-active {
+        color: $main-color;
+      }
+    }
+  }
+}
+
+.user__info {
+  text-align: right;
+  padding: 20px 6px;
+  font-size: 18px;
+  a {
+    text-decoration: none;
+    color: $text-color;
+  }
+}
+
+.user__nickname {
+  margin-bottom: 12px;
+  color: $text-color;
+}
+
+/* ====================================== banner ====================================== */
+.banner__bg {
+  width: 100%;
+  height: 200px;
+  background: url(./images/banner.jpg) center/cover no-repeat;
+  position: relative;
+  &::after {
+    content: "";
+    background-color: rgba(231, 204, 178, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.banner__title {
+  font-size: 24px;
+  text-align: center;
+  line-height: 200px;
+  position: relative;
+  z-index: 2;
+  color: $title-color;
+  font-weight: bold;
+}
+
+/* ====================================== main articles ====================================== */
+.articles {
+  padding: 12px 12px 0;
+}
+
+.breadcrumb {
+  display: flex;
+  width: 100%;
+  margin: 6px auto;
+  @extend %text-nowrap;
+  line-height: 2;
+  flex-wrap: wrap;
+  li {
+    padding: 0 12px;
+    @extend %text-nowrap;
+    a {
+      text-decoration: none;
+      color: $bg-color;
+      font-size: 16px;
+      font-weight: 300;
+      &:hover {
+        color: $main-color;
+      }
+      &.item-active {
+        color: $main-color;
+      }
+    }
+
+    + li {
+      padding-left: 6px;
+    }
+
+    + li::before {
+      content: "/";
+      color: $bg-color;
+      margin-right: 6px;
+    }
+  }
+}
+
+.article {
+  margin: 20px auto;
+  padding-bottom: 12px;
+  border-bottom: 1px solid $bg-color;
+  :last-child {
+    border-bottom: none;
+  }
+  &__title {
+    text-align: center;
+    font-size: 24px;
+    word-break: break-word;
+    line-height: 1.5;
+  }
+  &__time {
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    color: #888;
+  }
+  &__body {
+    margin-top: 12px;
+    padding: 0 12px;
+    @extend %text-cut;
+    text-align: center;
+
+    p {
+      line-height: 1.5;
+    }
+  }
+
+  &__footer {
+    margin-top: 12px;
+    text-align: center;
+  }
+}
+
+// 單篇文章留言
+.article__comments {
+  width: 300px;
+  border-top: 1px solid $bg-color;
+  margin: 60px auto 0;
+  padding: 12px;
+}
+
+.article__comments h2 {
+  font-size: 20px;
+}
+
+.article__comment {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+  &:last-child {
+    border-bottom: none;
+  }
+  &__nickname {
+    font-size: 18px;
+  }
+  &__time {
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #888;
+  }
+  &__body {
+    width: 100%;
+    p {
+      line-height: 1.5;
+      font-weight: 300;
+      /*text-overflow: ellipsis;*/
+      word-break: break-word;
+    }
+  }
+}
+
+// 分頁選單
+.page__info {
+  text-align: center;
+  margin: 12px auto 60px;
+  span {
+    color: $bg-color;
+  }
+  a {
+    display: inline-block;
+    text-decoration: none;
+    color: $bg-color;
+    padding: 0 6px;
+  }
+}
+
+/* ============================== sidebar ============================ */
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 12px;
+  line-height: 1.5;
+  &__title {
+    background-color: $bg-color;
+    font-size: 20px;
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    color: $text-color;
+    font-weight: bold;
+    border-radius: 6px;
+  }
+  &__avata {
+    margin-top: 12px;
+    min-width: 200px;
+    img {
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+  }
+  &.newest__articles {
+    align-items: flex-start;
+    .top_article {
+      padding: 0 12px;
+      width: 100%;
+      @extend %text-nowrap;
+    }
+
+    .btn-article {
+      margin-top: 12px;
+    }
+  }
+}
+
+.about__info {
+  padding: 0 12px;
+  margin-top: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.comment {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  align-items: flex-start;
+  &__title {
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+    @extend %text-cut;
+    text-align: left;
+  }
+  &__content {
+    width: 100%;
+
+    @extend %text-cut;
+    text-align: left;
+  }
+  &__time {
+    text-align: left;
+    color: #888;
+    font-size: 16px;
+  }
+}
+
+// ============================ footer ============================
+footer {
+  color: $text-color;
+  background-color: $main-color;
+  font-size: 18px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+/* ================================ login form ================================ */
+.form {
+  max-width: 600px;
+  margin: 24px;
+  &__login {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 200px;
+    border: 1px solid $bg-color;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 5px #dead7c;
+  }
+  &__input {
+    margin-top: 24px;
+    color: $main-color;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    &:last-child {
+      margin-top: 36px;
+    }
+  }
+  &__warning {
+    margin: 12px auto 48px;
+    text-align: center;
+    color: #e63946;
+    font-size: 20px;
+    letter-spacing: 3px;
+    font-weight: bold;
+  }
+}
+
+input {
+  padding: 6px 12px;
+  border: 1px solid $main-color;
+  border-radius: 6px;
+  color: #444;
+  font-size: 16px;
+}
+
+/* ============================ desktop screen ============================ */
+@media screen and (min-width: 768px) {
+  .btn {
+    &-article {
+      align-self: flex-start;
+      font-size: 18px;
+      &:hover {
+        color: $main-color;
+      }
+    }
+    &-submit:hover {
+      background-color: $main-color;
+    }
+  }
+
+  header {
+    width: 100%;
+  }
+
+  .wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    ul {
+      position: relative;
+      left: 0;
+      width: auto;
+      height: auto;
+      top: 0;
+      background-color: transparent;
+      display: flex;
+      li {
+        a {
+          border-bottom: none;
+          font-size: 22px;
+          @include transition(color, 0.3s);
+        }
+      }
+    }
+  }
+
+  .logo a {
+    font-size: 36px;
+  }
+
+  .user__info a {
+    margin-left: 12px;
+  }
+  .text-hover {
+    &:hover {
+      color: $main-color;
+    }
+  }
+
+  /* ============================ banner ===================== */
+  .banner__bg {
+    min-height: 270px;
+  }
+
+  .banner__title {
+    font-size: 40px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    display: inline-block;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+  }
+
+  /* ============================ main ===================== */
+
+  main .wrapper {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    padding: 0 6px;
+  }
+
+  .breadcrumb {
+    margin: 12px auto;
+  }
+
+  .about {
+    margin-top: 40px;
+  }
+
+  .articles {
+    padding-right: 30px;
+    width: 100%;
+  }
+
+  .article {
+    padding-bottom: 40px;
+    &__header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    &__title {
+      margin-right: 12px;
+      text-align: left;
+    }
+    &__body {
+      margin-top: 40px;
+      @extend %text-cut;
+      text-align: left;
+      font-weight: 300;
+      padding: 0 50px 0 0;
+      color: #444;
+    }
+  }
+
+  .article-nolimit {
+    display: block;
+    white-space: pre-wrap;
+  }
+  .admin__articles {
+    .article {
+      display: flex;
+      align-items: baseline;
+    }
+    .article__header {
+      display: flex;
+    }
+    .article__title {
+      flex: 1;
+    }
+  }
+
+  .article__footer {
+    margin-top: 30px;
+    padding-right: 30px;
+    text-align: right;
+  }
+
+  .article__comments {
+    width: 100%;
+    margin-top: 150px;
+    h2 {
+      text-align: center;
+      font-size: 2;
+    }
+  }
+
+  .newest__articles {
+    .btn-article {
+      margin-top: 20px;
+    }
+    .comment {
+      a {
+        margin-top: 12px;
+      }
+    }
+  }
+
+  .about__info {
+    padding: 0;
+    font-size: 18px;
+  }
+
+  footer {
+    padding: 30px;
+  }
+
+  /* ============================ login.php ===================== */
+  .form__field {
+    margin: 30px auto;
+  }
+
+  /* ============================ update_article.php ===================== */
+  .article__title {
+    input {
+      width: 700px;
+    }
+  }
+
+  .article__body {
+    textarea {
+      font-size: 18px;
+      resize: none;
+    }
+  }
+
+  .articles {
+    margin: 0 auto;
+    form {
+      text-align: center;
+      .submit-btn {
+        display: inline-block;
+        padding: 6px 24px;
+        background-color: $main-color;
+        color: $text-color;
+        cursor: pointer;
+      }
+    }
+  }
+  .article {
+    .title {
+      color: $main-color;
+      font-size: 20px;
+      text-align: left;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+  }
+}
