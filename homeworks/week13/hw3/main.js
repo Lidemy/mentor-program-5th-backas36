@@ -47,7 +47,6 @@ const getTopGamesFromServer = async() => {
   const API_URL = 'https://api.twitch.tv/kraken'
   const CLIENT_ID = 'tm4ra1rlrgu90xwmddp165gfvyzawy'
   const ACCEPT = 'application/vnd.twitchtv.v5+json'
-
   const response = await fetch(API_URL + endPoint, {
     method: 'GET',
     headers: new Headers({
@@ -55,21 +54,22 @@ const getTopGamesFromServer = async() => {
       Accept: ACCEPT
     })
   })
-  if (response.status !== 200) {
+  try {
+    if (response.ok) {
+      const data = await response.json()
+      return data
+    }
     throw new Error(errMsg)
+  } catch (error) {
+    alert(errMsg + error)
   }
-  const data = await response.json()
-  return data
 }
 
-getTopGamesFromServer()
-  .then((data) => {
-    const topGames = data.top
-    renderNavbar(topGames)
-  })
-  .catch((error) => {
-    alert(`errMsg : ${error.message}`)
-  })
+(async() => {
+  const data = await getTopGamesFromServer()
+  const topGames = data.top
+  renderNavbar(topGames)
+})()
 
 const renderNavbar = (topGames) => {
   topGames.forEach((topGame) => {
@@ -83,24 +83,21 @@ const renderNavbar = (topGames) => {
 
 const renderStreamsCards = (gameName) => {
   document.querySelector('.game__title').textContent = gameName
-  document.querySelector('.streams').innerHTML = ''
+  document.querySelector('.streams').innerHTML = '';
 
-  getStreamsFromServer(gameName)
-    .then((data) => {
-      const { streams } = data
-      streams.forEach((stream) => appendStream(stream))
-      appendEmpty()
-      appendEmpty()
-      navMenu.querySelectorAll('li').forEach((li) => {
-        li.classList.remove('link--active')
-        if (li.textContent === gameName) {
-          li.classList.add('link--active')
-        }
-      })
-    })
-    .catch((error) => {
-      alert(`errMsg :${error.message}`)
-    })
+  (async() => {
+    const data = await getStreamsFromServer(gameName)
+    const { streams } = data
+    streams.forEach((stream) => appendStream(stream))
+  })()
+  appendEmpty()
+  appendEmpty()
+  navMenu.querySelectorAll('li').forEach((li) => {
+    li.classList.remove('link--active')
+    if (li.textContent === gameName) {
+      li.classList.add('link--active')
+    }
+  })
 }
 
 const getStreamsFromServer = async(gameName) => {
@@ -116,13 +113,15 @@ const getStreamsFromServer = async(gameName) => {
       Accept: ACCEPT
     })
   })
-
-  if (response.status !== 200) {
+  try {
+    if (response.ok) {
+      const data = await response.json()
+      return data
+    }
     throw new Error(errMsg)
+  } catch (error) {
+    alert(errMsg + error)
   }
-
-  const data = await response.json()
-  return data
 }
 
 const appendEmpty = () => {
