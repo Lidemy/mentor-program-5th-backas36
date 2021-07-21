@@ -84,16 +84,14 @@ const renderNavbar = (topGames) => {
 const renderStreamsCards = (gameName) => {
   document.querySelector('.game__title').textContent = gameName
   document.querySelector('.streams').innerHTML = '';
-
   // getStreams Promise
   (async() => {
     const data = await getStreamsFromServer(gameName)
     const { streams } = data
     streams.forEach((stream) => appendStream(stream))
+    appendEmpty()
+    appendEmpty()
   })()
-
-  appendEmpty()
-  appendEmpty()
 
   navMenu.querySelectorAll('li').forEach((li) => {
     li.classList.remove('link--active')
