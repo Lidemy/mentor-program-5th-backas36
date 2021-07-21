@@ -1,0 +1,183 @@
+<!-- 網址在這 http://mentor-program.co/mtr04group5/yang36/week12_hw1/index.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script>
+    $(document).ready(() => {
+      const commentsDOM = $('.comments')
+      const requestData = {
+        site_key: '1234',
+        before: 0,
+        lastId: null,
+        isEnd: false
+      }
+      const escapeOutput = (toOutput) => {
+        return toOutput.replace(/\&/g, '&amp;')
+          .replace(/\</g, '&lt;')
+          .replace(/\>/g, '&gt;')
+          .replace(/\"/g, '&quot;')
+          .replace(/\'/g, '&#x27')
+          .replace(/\//g, '&#x2F');
+      }
+
+      const appendCommentToDOM = (targetDOM, comment) => {
+        const html = `
+        <div class="card comment mb-3">
+          <div class="card-body">
+            <h5 class="card-title">${escapeOutput(comment.nickname)}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">${escapeOutput(comment.created_at)}</h6>
+            <p class="card-text">${escapeOutput(comment.content)}</p>
+          </div>
+        </div>
+        `
+        targetDOM.append(html)
+      }
+
+      const getCommentsAPI = (requestData, callback) => {
+        const url = `./api_comments.php?site_key=${requestData.site_key}&before=${requestData.before}`
+        $.ajax({
+          type: 'GET',
+          url,
+          success: function (response) {
+            if (!response.ok) {
+              callback(response.message)
+              return
+            }
+            callback(undefined, response)
+          },
+          error: function (error) {
+            callback('資料庫連線錯誤')
+          }
+        })
+      }
+
+      const addCommentAPI = (newCommentData, callback) => {
+        $.ajax({
+          type: 'POST',
+          url: './api_add_comments.php',
+          data: newCommentData,
+          success: function (response) {
+            if (!response.ok) {
+              callback(response.message)
+              return
+            }
+            callback(undefined, response)
+          },
+          error: function (error) {
+            callback('資料庫連線錯誤')
+          }
+        })
+      }
+
+      const getCommentsCb = (requestData) => {
+        $('.load__field').empty()
+
+        if (requestData.isEnd) {
+          return
+        }
+        getCommentsAPI(requestData, (error, response) => {
+          if (error) {
+            alert(error)
+            return
+          }
+          const comments = response.discussions
+          const commentsLength = comments.length
+          comments.forEach(comment => [
+            appendCommentToDOM(commentsDOM, comment)
+          ])
+          if (commentsLength === 0) {
+            requestData.isEnd = true
+            return
+          } else {
+            lastId = comments[comments.length - 1].id
+            requestData.before = lastId
+
+            $('.load__field').html(`<button type="button" class="btn btn-primary load__btn">Load more</button>`)
+          }
+        })
+      }
+
+      const addCommentCb = (newCommentData) => {
+        addCommentAPI(newCommentData, (error, response) => {
+          if (error) {
+            alert(error)
+            return
+          }
+
+          alert('留言新增成功')
+          commentsDOM.empty()
+          requestData.before = 0
+          requestData.lastId = null
+          requestData.isEnd = false
+          getCommentsCb(requestData)
+
+          $('input[name=nickname]').val('')
+          $('textarea[name=content]').val('')
+        })
+      }
+
+      getCommentsCb(requestData)
+
+      $('.add__comment__form').on('submit', (event) => {
+        event.preventDefault()
+        const newCommentData = {
+          site_key: '1234',
+          nickname: $('input[name=nickname]').val(),
+          content: $('textarea[name=content]').val()
+        }
+        addCommentCb(newCommentData)
+
+      })
+
+      $('.load__field').on('click', $('.load__btn'), (event) => {
+        getCommentsCb(requestData)
+
+      })
+    })
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">留言板API版</span>
+    </div>
+  </nav>
+  <main>
+    <div class="container">
+      <div class="row ">
+        <form class="add__comment__form">
+          <div class="mb-3 mt-3">
+            <label for="nickname" class="form-label">暱稱</label>
+            <input type="text" class="form-control" id="nickname" name="nickname">
+          </div>
+          <div class="mb-3">
+            <label for="comment__content" class="form-label">留言內容</label>
+            <textarea class="form-control" id="comment__content" rows="5" name="content"></textarea>
+          </div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary mb-3">送出</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="row comments">
+      </div>
+      <div class="row d-grid gap-2 col-4 mx-auto load__field">
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+
+</html>

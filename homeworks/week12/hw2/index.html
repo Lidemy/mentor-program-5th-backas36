@@ -1,0 +1,290 @@
+<!-- 網址在這 http://mentor-program.co/mtr04group5/yang36/week12_hw2/index.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List v2</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <style>
+    main.container {
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .custom {
+      width: 40px;
+      height: 40px;
+    }
+
+    .fas {
+      pointer-events: none;
+    }
+  </style>
+  <script>
+
+    $(document).ready(() => {
+
+      const todosDOM = $('.list-group')
+      const url = new URL(window.location)
+      const params = url.searchParams
+      let todosId = params.get('todosId')
+      let todosAction = $('input[name=todosAction]:checked').val()
+      let todos = []
+
+      const createTodoArr = (newTodoContent) => {
+        todos.push({
+          content: newTodoContent,
+          isCompleted: false,
+          todoId: Date.now().toString()
+        })
+      }
+
+      const escapeHtml = (unsafe) => {
+        return unsafe
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      const makeTodoTemplate = (todo) => {
+
+        return `<li class="d-flex flex-column flex-sm-row justify-content-start align-items-center px-2 list-group-item">
+          <div class="w-100 fs-5 ">
+             <input type="text" class="form-control d-none my-2" aria-describedby="todo list content" />
+            <span class="text-break ${todo.isCompleted ? 'text-decoration-line-through' : ''}"
+              data-todo-id="${todo.todoId}">${todo.content}</span>
+          </div>
+          <div class="flex-shrink-1 d-flex align-self-start align-self-md-center">
+            <button type=" button" class="custom ms-0 ms-md-2 btn btn-success btn-edit"><i
+              class="fas fa-pen"></i></button>
+            <button type=" button" class="custom ms-1 btn btn-primary btn-completed"><i
+              class="fas fa-check"></i></button>
+            <button type="button" class="custom ms-1 btn btn-danger btn-deleted"><i
+              class="fas fa-times text-white"></i></button>
+          </div>
+        </li>`
+      }
+
+      const renderTodos = (todosAction) => {
+        todosDOM.empty()
+        let resultTodos = todos
+        if (todosAction === 'incompletedList') {
+          resultTodos = resultTodos.filter(todo => !todo.isCompleted)
+        }
+
+        if (todosAction === 'completedList') {
+          resultTodos = resultTodos.filter(todo => todo.isCompleted)
+        }
+
+        resultTodos.forEach(todo => {
+          let todoTemplate = makeTodoTemplate(todo)
+          todosDOM.append(todoTemplate)
+        })
+      }
+
+      const deleteList = (todoSelectedIndexArr) => {
+        let result = todos
+        for (let i = 0; i < todoSelectedIndexArr.length; i++) {
+          result = result.map(todo => {
+            if (todos.indexOf(todo) !== todoSelectedIndexArr[i]) {
+              return todo
+            }
+          })
+        }
+        todos = result.filter(todo => todo !== undefined)
+        return todos
+        // 刪除不連續陣列這邊搞好久，之後有時間要多練習這邊！
+      }
+
+      // getTodos from Server
+      if (todosId) {
+        $.getJSON(`./get_todos.php?todosId=${todosId}`, (response) => {
+          todos = JSON.parse(response.data.todos)
+          renderTodos(todosAction)
+        }
+        )
+      }
+
+      //save todos to Server
+      $('.btn-save').on('click', e => {
+        let todosJson = JSON.stringify(todos)
+        $.ajax({
+          type: 'POST',
+          url: `./add_todos.php`,
+          data: { todos: todosJson },
+          success: function (response) {
+            if (!response.ok) {
+              alert('something wrong in server ...')
+            }
+            todosId = response.id
+            window.location = `index.html?todosId=${todosId}`
+          },
+          error: function (error) {
+            alert('something wrong OMG')
+          }
+        })
+      })
+
+      // Add new todo to DOM 
+      $('#button-addNewTodo').on('click', (e) => {
+
+        e.preventDefault()
+        let newTodo
+        if ($('#input-newTodo').val() === '' || $('#input-newTodo').val() === null) {
+          alert('Please input todo task.')
+          return
+        } else {
+          newTodoContent = escapeHtml($('#input-newTodo').val())
+        }
+
+        createTodoArr(newTodoContent)
+
+        $('.form-check-input')[0].checked = true
+        todosAction = $('input[name=todosAction]:checked').val()
+
+        renderTodos(todosAction)
+
+        $('#input-newTodo').val('')
+      })
+
+      //todo action button
+      todosDOM.on('click', 'button', (e) => {
+        const todoAction = $(e.target)
+        const todoLi = todoAction.parent().parent()
+        const todoContentDOM = $(todoLi.children()[0])
+        const todoContentSpan = $(todoContentDOM.children()[1])
+
+        const todoSelectedIndex = todos.findIndex(todo => todo.todoId === String(todoContentSpan.data('todo-id')))
+        if (todoAction.hasClass('btn-deleted')) {
+          todos = deleteList([todoSelectedIndex])
+          renderTodos(todosAction)
+        }
+        if (todoAction.hasClass('btn-completed')) {
+          if (todos[todoSelectedIndex].isCompleted) {
+            todos[todoSelectedIndex].isCompleted = false
+          } else {
+            todos[todoSelectedIndex].isCompleted = true
+          }
+          renderTodos(todosAction)
+        }
+
+        if (todoAction.hasClass('btn-edit')) {
+          const todoContentInput = $(todoContentDOM.children()[0])
+          todoContentInput.val(todos[todoSelectedIndex].content)
+
+          todoContentInput.toggleClass('d-none')
+          todoContentSpan.toggleClass('d-none')
+          todoContentInput.focus()
+          todoContentInput.change(e => {
+            let newTodoValue = e.target.value
+            todos[todoSelectedIndex].content = newTodoValue
+            renderTodos(todosAction)
+          })
+
+        }
+      })
+
+      // todos Action
+      $('.form-check-input').change((e) => {
+        todosAction = $('input[name=todosAction]:checked').val()
+        renderTodos(todosAction)
+      })
+
+      // clean all todo
+      $('.btn-clean').on('click', (e) => {
+        todos = []
+        renderTodos(todosAction)
+      })
+
+      // clean completed todo
+      $('.btn-clean-completed').on('click', (e) => {
+        let completedArr = todos.map(todo => todo.isCompleted)
+        let completedIndexArr = []
+        let fromIndex = 0
+        while (fromIndex < todos.length) {
+          fromIndex = completedArr.indexOf(true, fromIndex)
+          if (fromIndex === -1) break
+          completedIndexArr.push(fromIndex)
+          fromIndex = fromIndex + 1
+        }
+        deleteList(completedIndexArr)
+        renderTodos(todosAction)
+      })
+
+    })
+  </script>
+
+</head>
+
+
+<body>
+  <header class="shadow-sm">
+    <nav class="navbar navbar-light bg-light justify-content-center">
+      <span class="navbar-brand mb-0 h1">Tolist</span>
+    </nav>
+  </header>
+  <main class="container nt-5 px-3">
+    <div class="card border-secondary my-5 shadow">
+      <div class="col p-4 card-header">
+        <form class="input-group ">
+          <input type="text" class="form-control fs-5" placeholder="Add Todo task here." aria-label="Add Todo task"
+            aria-describedby="button-addTodo" id="input-newTodo" autofocus>
+          <button class="btn btn-outline-secondary fs-5" type="submit" id="button-addNewTodo">新增</button>
+        </form>
+      </div>
+      <div class="col-12 px-4 py-4 d-md-flex justify-content-around ">
+        <div class="form-check ">
+          <input class="form-check-input" type="radio" name="todosAction" id="allList" value="allList" checked>
+          <label class="form-check-label" for="allList">Show All </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="todosAction" id="completedList" value="completedList">
+          <label class="form-check-label" for="completedList">Show Completed Tasks</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="todosAction" id="incompletedList" value="incompletedList">
+          <label class="form-check-label" for="incompletedList">Show Incompleted Tasks</label>
+        </div>
+      </div>
+
+      <div class="col pb-4 pt-0 card-body text-primary ">
+        <ul class="list-group">
+          <!--<li class="d-flex flex-column flex-md-row justify-content-start align-items-center px-2 list-group-item">
+            <div class="w-100 fs-5">
+              <input type="text" class="form-control d-none my-2" aria-describedby="todo list content">
+              <span class="text-break"
+                data-todo-id="1626260196705">dagsaglgm;lkagl;rekg;redagsaglgm;lkagl;rekg;redagsaglgm;lkagl;rekg;redagsaglgm;lkagl;rekg;redagsaglgm;lkagl;rekg;redagsaglgm;lkagl;rekg;redagsaglgm;lkagl;rekg;redagsaglgm;lkagl;rekg;re</span>
+            </div>
+            <div class="flex-shrink-1 d-flex align-self-start align-self-md-center">
+              <button type=" button" class="custom ms-0 ms-md-2 btn btn-success btn-edit"><i
+                  class="fas fa-pen"></i></button>
+              <button type=" button" class="custom ms-1 btn btn-primary btn-completed"><i
+                  class="fas fa-check"></i></button>
+              <button type="button" class="custom ms-1 btn btn-danger btn-deleted"><i
+                  class="fas fa-times text-white"></i></button>
+            </div>
+          </li>-->
+        </ul>
+      </div>
+      <div class="mx-auto mb-3">
+        <a class="btn btn-outline-primary me-5 btn-save" type="button">Save</a>
+        <button class="btn btn-outline-primary me-1 btn-clean" type="button">清除所有</button>
+        <button class="btn btn-outline-primary me-1 btn-clean-completed" type="button">清除已完成</button>
+      </div>
+    </div>
+  </main>
+
+
+</body>
+
+</html>
