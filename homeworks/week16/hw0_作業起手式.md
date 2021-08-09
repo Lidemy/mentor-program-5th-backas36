@@ -1320,6 +1320,46 @@ huii.greeting()
 相較之下，Object.create 的方式建立子類別看起來好像沒那麼複雜，可能是因為沒有太多新的關鍵字要學習吧！
 比較值得注意的是跟 constructor function 方式一樣，我們都必須了解 `new` 幫我們做了些什麼，還有必須理解 `call` 如何使用。
 
+## 最後談談物件導向的封裝在 JS 中如何實現
+
+因為我對這邊的了解還不夠深，但為了能夠完整整個物件導向的筆記，所以暫且就只列出我目前理解的範圍，如果日後更了解後再來 update 。
+
+如果我們要將上述範例的 username 改成 private ，也就是讓外部不能夠隨意修改 username 的值，也就是讓 username 變成是唯讀的形式。
+
+```
+class UserClass {
+  #username
+  constructor(username, greetWord) {
+     this.#username = username
+     this.greetWord = greetWord
+  }
+
+  greeting() {
+    console.log(this.greetWord + '，' + this.#username)
+  }
+
+  get username(){
+    return this.#username
+  }
+
+}
+
+const yang = new UserClass('Yang', 'Hello')
+
+// 在外部改寫 username 值
+yang.username = 'HACKER'
+yang.greeting()	//Hello，Yang
+```
+
+注意到我們多了一行 `#username` 並且是放在 constructor 外面，如果這個 username 的值是由 UserClass 來給的話，那我們連 constructor 裡面的 ` this.#username = username` 這行都可以省略，因為這樣就代表 username 的值不是經由 new instance 與 UserClass 的 constructor 來生成，而是直接由 UserClass 內部來產生的。
+
+再來必須要注意因為我們定義了 #username 為 private 之後還是不夠的，此時在外部 `yang.username = 'HACKER'` ，就等於幫 yang 新增一個叫做 username 屬性為 HACKER。為了解決這問題，我們必須使用 `get` 來設定當我們讀取 `yang.username` 實際上是 `yang.#username`。
+可以想像成利用 get 的方式來讀取 username = #username。
+
+
+> *這部分真的寫得有點粗略，就當作是草稿好了，看看就好。*
+
+
 
 ---
 
