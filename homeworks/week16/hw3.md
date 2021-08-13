@@ -68,3 +68,13 @@ function fn(){
 ![](3-4.jpg)
 
 fn2 執行完畢 => 回到 fn 繼續執行 => `console.log(a) //20` => fn 執行完畢 => 回到 global => `console.log(a) //1`  因為目前已經是在 global 中，所以會從 globalEC.scopeChain 找 a ，這時候的 a 為 1 => 再來又將 a 重新賦值為 10 => globalEC.VO 裡面的 a 從 1 變成 10 => `console.log(a) // 10` => `console.log(b) //100` 剛剛在 fn2 時有遇到 `b=100` 時就已經幫我們在 globalEC 加上 b=100 了，所以 b = 100。   
+
+將以上的步驟拼湊起來，我們可以得到這個程式跑出來的結果：
+```
+5
+6
+20
+1
+10
+100
+```
