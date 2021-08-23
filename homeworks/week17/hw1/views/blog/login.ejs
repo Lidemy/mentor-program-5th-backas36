@@ -1,0 +1,36 @@
+<%- include('../templates/head.ejs')%>
+  <%- include('../templates/navigation.ejs', {categories})%>
+    <%- include('../templates/banner.ejs')%>
+
+      <div class="form__field">
+        <form action="/login" method="post" class="form form__login">
+          <div class="form__input">
+            <span>帳號 ：</span>
+            <input type="text" name="username" />
+          </div>
+          <div class="form__input">
+            <span>密碼 ：</span>
+            <input type="password" name="password" />
+          </div>
+          <div class="form__input">
+            <input type="submit" class="btn btn-submit" value="login" /><br />
+            <a href="/register" class="btn btn-light">Register New Account</a>
+          </div>
+        </form>
+
+        <div class="form__warning">
+          <div>
+            <% if (errorMessage && errorMessage.length> 0) { %>
+              <p>
+                <%= errorMessage %>
+              </p>
+              <% } %>
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <%- include('../templates/sidebar.ejs', {newArticles, newComments})%>
+        <%- include('../templates/footer.ejs')%>

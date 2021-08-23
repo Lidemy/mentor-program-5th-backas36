@@ -1,0 +1,59 @@
+<aside>
+
+  <div class="about">
+    <div class="about__title">
+      <h2>關於我</h2>
+    </div>
+    <div class="about__avata">
+      <img src="/images/avatar.jpg">
+    </div>
+    <div class="about__info">
+      <p>切版花了我好久的時間，但是我沒辦法丟下他不管！對不起，Huli，雖然你說先不用管切版！功能做出來比較重要 😖</p>
+    </div>
+  </div>
+  <div class="about newest__articles">
+    <div class="about__title">
+      <h2>最新文章</h2>
+    </div>
+    <% newArticles.forEach(article=> {%>
+      <div class="top_article">
+        <a href="/article/<%=article.id%>" class="btn btn-article">
+          <span class="comment__title">
+            <%= article.title%>
+          </span>
+        </a>
+      </div>
+
+      <%})%>
+  </div>
+  <div class="about newest__comments">
+    <div class="about__title ">
+      <h2>最新留言</h2>
+    </div>
+    <% newComments.forEach(comment=> {%>
+
+      <div class="about__info comment">
+        <a href="/article/<%=comment.Article.id%>" class="btn btn-article">
+          <sapn class="comment__title">
+            <%=comment.Article.title%>
+          </sapn>
+        </a>
+        <p class="comment__content">
+          <%=comment.content%>
+        </p>
+        <p class="comment__time">
+          <%=comment.User.nickname%>
+        </p>
+        <p class="comment__time">
+          <%=String(comment.createdAt).slice(0,21)%>
+        </p>
+      </div>
+      <%})%>
+
+  </div>
+</aside>
+
+<!-- for wrapper -->
+</div>
+
+</main>

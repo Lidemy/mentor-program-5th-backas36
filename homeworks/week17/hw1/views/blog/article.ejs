@@ -1,0 +1,50 @@
+<%- include('../templates/head.ejs')%>
+  <%- include('../templates/navigation.ejs', {categories})%>
+    <%- include('../templates/banner.ejs')%>
+      <div class="articles">
+        <div class="article">
+          <div class="article__header">
+            <div class="article__title">
+              <%= article.title%>
+            </div>
+            <div class="article__time">
+              <%= (String(article.createdAt)).slice(0,21)%>
+            </div>
+          </div>
+          <div class="article__body article-nolimit">
+            <p>
+              <%= article.content%>
+            </p>
+          </div>
+          <div class="article__footer">
+            <div class="article-comments">
+              <h2>Comments</h2>
+              <% if(comments.length> 0 ){%>
+                <% comments.forEach(comment=> { %>
+                  <div class="article-comment">
+                    <div class="article-comment__header">
+                      <div class="article-comment__nickname">
+                      </div>
+                      <%- comment.User.nickname%>
+                        <div class="article-comment__time">
+                          <%= String(comment.createdAt).slice(0,21) %>
+                        </div>
+                    </div>
+                    <div class="article-comment__body">
+                      <p>
+                        <%- comment.content%>
+                      </p>
+                    </div>
+                  </div>
+                  <%})%>
+                    <%} else {%>
+                      <h3 style="text-align: center;margin-top:50px;">No Comments Now...</h3>
+                      <%}%>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <%- include('../templates/sidebar.ejs', {newArticles})%>
+        <%- include('../templates/footer.ejs')%>

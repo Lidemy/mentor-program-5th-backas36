@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Have A Pet - Login</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <style>
+    .login-form {
+      max-width: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand mb-0 h1" href="/">來選一隻寵物陪你讀書吧</a>
+      <div>
+        <a href="/login" class="btn btn-outline-success" type="submit">管理者登入</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5 ">
+    <% if (errorMessage && errorMessage.length> 0) { %>
+      <div class="alert alert-danger mb-5 " role="alert">
+        <p>
+          <%= errorMessage %>
+        </p>
+      </div>
+      <% } %>
+
+        <form class="row g-3 login-form" action="/login" method="POST">
+          <div class="col-12">
+            <label for="username" class="form-label">Username</label>
+            <input name="username" type="text" class="form-control" id="username" required>
+          </div>
+          <div class="col-12">
+            <label for="password" class="form-label">Password</label>
+            <input name="password" type="password" class="form-control" id="password" required>
+          </div>
+
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">Login</button>
+            <a href="/register" class="btn btn-primary">註冊</a>
+          </div>
+        </form>
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<%- include('../templates/head.ejs')%>
+  <%- include('../templates/navigation.ejs', {categories})%>
+    <%- include('../templates/banner.ejs')%>
+      <div class="articles">
+        <form action="/admin/update-category" method="post">
+          <div class="article">
+            <div class="article__header">
+              <div class="article__title">
+                <div class="title">分類名稱：</div>
+                <input type="text" name="categoryName" value="<%= category.category_name %>" />
+              </div>
+            </div>
+          </div>
+
+          <input type="hidden" name="categoryId" value="<%=category.id%>">
+
+
+          <input type="submit" class="submit-btn" value="確認編輯" />
+        </form>
+        <div class="form__warning">
+          <div>
+            <% if (errorMessage && errorMessage.length> 0) { %>
+              <p>
+                <%= errorMessage %>
+              </p>
+              <% } %>
+
+          </div>
+        </div>
+      </div>
+
+      <%- include('../templates/sidebar.ejs', {newArticles, newComments})%>
+        <%- include('../templates/footer.ejs')%>
