@@ -1,0 +1,36 @@
+<%- include('../templates/head.ejs')%>
+  <%- include('../templates/navigation.ejs', {categories})%>
+    <%- include('../templates/banner.ejs')%>
+      <div class="admin__articles">
+        <% categories.forEach( category=> {%>
+          <div class="article">
+            <div class="article__header">
+              <div class="article__title">
+                <%= category.category_name%>
+              </div>
+
+            </div>
+            <div class="article__footer">
+              <a href="/admin/update-category?categoryId=<%=category.id%>" class="btn btn-link"> Edit</a>
+              <a href="/admin/delete-category?categoryId=<%=category.id%>" class="btn btn-link">Delete</a>
+            </div>
+          </div>
+
+          <% })%>
+            <div class="articles">
+              <form action="/admin/add-category" method="POST">
+                <div class="article">
+                  <div class="article__header">
+                    <div class="article__title" style="font-size: 20px; margin-bottom: 20px;">
+                      分類名稱：
+                      <input type="text" name="category_name" value="" />
+                    </div>
+                    <input type="submit" class="submit-btn" value="新增分類" />
+                  </div>
+                </div>
+              </form>
+            </div>
+      </div>
+
+      <%- include('../templates/sidebar.ejs', {newArticles, newComments})%>
+        <%- include('../templates/footer.ejs')%>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Have A Pet - Admin</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <style>
+    .data-description {
+      max-width: 460px;
+    }
+
+    td.prize-image {
+      max-width: 100px;
+    }
+
+    td.prize-image img {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand mb-0 h1" href="/admin">來選一隻寵物陪你讀書吧 - Admin</a>
+      <div>
+        <a class="btn btn-outline-warning" href='/' type="submit">回前台</a>
+        <a class="btn btn-outline-success" href='/admin/add-prize' type="submit">Add</a>
+        <a class="btn btn-outline-danger" href="/logout" type="submit">Logout</a>
+      </div>
+    </div>
+  </nav>
+  <div class="container mt-5 ">
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image Priview</th>
+            <th scope="col">機率</th>
+            <th scope="col">Action</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <%prizes.forEach(prize=> {%>
+            <tr>
+              <th scope="row">
+                <%= prize.name%>
+              </th>
+              <td class="data-description">
+                <%= prize.description%>
+              </td>
+              <td class="prize-image">
+                <img src="<%= prize.imageUrl%>">
+              </td>
+              <td>
+                <%= prize.probability%>
+              </td>
+              <td>
+                <a href="/admin/update-prize?prizeId=<%= prize.id%>" class="btn btn-primary">編輯</a>
+                <a href="/admin/delete-prize?prizeId=<%= prize.id%>" class="btn btn-danger">刪除</a>
+              </td>
+
+            </tr>
+            <%})%>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

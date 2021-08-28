@@ -1,0 +1,56 @@
+<%- include('../templates/head.ejs')%>
+  <%- include('../templates/navigation.ejs', {categories})%>
+    <%- include('../templates/banner.ejs')%>
+      <div class="articles">
+        <form action="/admin/update-article" method="post">
+          <div class="article">
+            <div class="article__header">
+              <div class="article__title">
+                <div class="title">文章標題：</div>
+                <input type="text" name="articleTitle" value="<%= article.title %>" />
+              </div>
+              <div class="article__time">
+                <div class="title">文章分類：</div>
+
+                <select class="input__field form-hide" name="categoryId">
+                  <% categories.forEach( category=> { %>
+                    <% if(article.Category.id===category.id) { %>
+                      <option value="<%= category.id%>" selected>
+                        <%= category.category_name %>
+                      </option>
+                      <%} else {%>
+                        <option value="<%= category.id%>">
+                          <%= category.category_name %>
+                        </option>
+                        <%}%>
+                          <% }) %>
+                </select>
+
+              </div>
+            </div>
+            <div class="article__body">
+              <div class="title">文章內容：</div>
+              <textarea name="articleContent" cols="60" rows="30"><%= article.content %></textarea>
+            </div>
+
+          </div>
+
+          <input type="hidden" name="articleId" value="<%=article.id%>">
+
+
+          <input type="submit" class="submit-btn" value="確認編輯" />
+        </form>
+        <div class="form__warning">
+          <div>
+            <% if (errorMessage && errorMessage.length> 0) { %>
+              <p>
+                <%= errorMessage %>
+              </p>
+              <% } %>
+
+          </div>
+        </div>
+      </div>
+
+      <%- include('../templates/sidebar.ejs', {newArticles, newComments})%>
+        <%- include('../templates/footer.ejs')%>

@@ -1,0 +1,46 @@
+<%- include('../templates/head.ejs')%>
+  <%- include('../templates/navigation.ejs', {categories})%>
+    <%- include('../templates/banner.ejs')%>
+      <div class="articles">
+        <% articles.forEach( article=> {%>
+          <div class="article">
+            <div class="article__header">
+              <div class="article__title">
+                <%= article.title%>
+              </div>
+              <div class="article__time">
+                【 <%= article.Category.category_name%> 】
+              </div>
+              <div class="article__time">
+                <%= (String(article.createdAt)).slice(0,21)%>
+              </div>
+            </div>
+            <div class="article__body">
+              <p>
+                <%= article.content%>
+              </p>
+            </div>
+            <div class="article__footer">
+              <a href="/article/<%= article.id %>" class="btn btn-link"> More</a>
+            </div>
+          </div>
+          <% })%>
+            <div class="page__info">
+              <% if(page !==1 ) {%>
+                <a href="/?page=<%=(page -1)%>">
+                  < </a>
+                    <% } %>
+                      <span>
+                        <%= page %> /
+                          <%= totalPage%>
+                      </span>
+                      <% if(page !==totalPage ) {%>
+                        <a href="/?page=<%= (page +1) %>"> > </a>
+                        <a href="/?page=<%= totalPage %>"> 最末頁 </a>
+                        <% } %>
+            </div>
+
+      </div>
+
+      <%- include('../templates/sidebar.ejs', {newArticles, newComments})%>
+        <%- include('../templates/footer.ejs')%>
