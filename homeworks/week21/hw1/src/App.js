@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useState, useRef } from 'react';
 
 import TodoItem from './TodoItem';
-import './App.css';
 
 const TodosWrapper = styled.div`
   padding: 20px;
@@ -68,7 +67,38 @@ const TodoList = styled.div`
   }
 `
 
+const ActionWrapper = styled.div`
+  padding: 6px;
+
+  & button {
+    margin-right:6px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: none;
+    background-color: #264653;
+    color: #f1faee;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    
+    :hover {
+    opacity: 1;
+
+    }
+  }
+`
+
 function App() {
+  const id = useRef(3)
+  const [value, setValue] = useState('')
+  const [filter, setFilter] = useState('all')
+  const filterActions = {
+    all: () => true,
+    completed: todo => todo.isCompleted,
+    incompleted: todo => !todo.isCompleted
+  }
   const [todos, setTodos] = useState([
     {
       id: 1,
@@ -82,15 +112,12 @@ function App() {
     }
   ])
 
-  const [value, setValue] = useState('')
-  const id = useRef(3)
-
   const handleButtonClick = () => {
     setTodos([
       ...todos, {
         id: id.current,
         content: value,
-        isDone: false,
+        isCompleted: false,
       }]
     )
     setValue('')
@@ -116,6 +143,21 @@ function App() {
     }))
   }
 
+  const handleFilterCompleted = () => {
+    setFilter('completed')
+  }
+
+  const handleFilterInCompleted = () => {
+    setFilter('incompleted')
+  }
+
+  const handleFilterAll = () => {
+    setFilter('all')
+  }
+
+  const handleCleanCompleted = () => {
+    setTodos(todos.filter(todo => !todo.isCompleted))
+  }
 
 
   return (
@@ -123,12 +165,47 @@ function App() {
       <TodosWrapper className="wrapper">
         <h2 className="title">Todo List App</h2>
         <AddTodoWrapper>
-          <input type="text" className="todo-input" placeholder="Enter a task." onChange={handleInputChange} value={value} />
-          <button className="add-btn" type="submit" onClick={handleButtonClick}><i className="fas fa-plus"></i></button>
+          <input
+            type="text"
+            className="todo-input"
+            placeholder="Enter a task."
+            onChange={handleInputChange}
+            value={value}
+          />
+          <button
+            className="add-btn"
+            type="submit"
+            onClick={handleButtonClick}
+          >
+            <i className="fas fa-plus" />
+          </button>
         </AddTodoWrapper>
+        <ActionWrapper>
+          <button
+            onClick={handleFilterCompleted}
+          >完成</button>
+          <button
+            onClick={handleFilterInCompleted}
+          >未完成</button>
+          <button
+            onClick={handleFilterAll}
+          >全部</button>
+          <button
+            onClick={handleCleanCompleted}
+          >清空已完成</button>
+        </ActionWrapper>
         <TodoList className="todo-list">
           <ul className="todo-list-ul">
-            {todos.map(todo => <TodoItem key={todo.id} todo={todo} handleDeleteTodo={handleDeleteTodo} handleToggleIsCompleted={handleToggleIsCompleted} />)}
+            {todos
+              .filter(filterActions[filter])
+              .map(todo => {
+                return (
+                  <TodoItem
+                    key={todo.id}
+                    todo={todo}
+                    handleDeleteTodo={handleDeleteTodo} handleToggleIsCompleted={handleToggleIsCompleted}
+                  />)
+              })}
           </ul>
 
         </TodoList>

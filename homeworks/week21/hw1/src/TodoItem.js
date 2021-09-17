@@ -1,4 +1,3 @@
-import './App.css'
 import styled from 'styled-components'
 
 const TodoItemLi = styled.li`
@@ -71,8 +70,17 @@ export default function TodoItem({ todo, handleDeleteTodo, handleToggleIsComplet
     <TodoItemLi data-todo-id={todo.id}>
       <TodoItemSpan $isCompleted={todo.isCompleted}>{todo.content}</TodoItemSpan>
 
-      <Button className="completed-btn" onClick={() => { handleToggleIsCompleted(todo.id) }}><TodoActionIcon className="fas fa-check "></TodoActionIcon></Button>
-      <Button className="trash-btn" onClick={() => { handleDeleteTodo(todo.id) }}><TodoActionIcon className="fas fa-trash "></TodoActionIcon></Button>
+      <Button
+        className="completed-btn"
+        onClick={() => { handleToggleIsCompleted(todo.id) }}
+      >
+        <TodoActionIcon className="fas fa-check " />
+      </Button>
+      <Button
+        className="trash-btn"
+        onClick={() => { handleDeleteTodo(todo.id) }}>
+        <TodoActionIcon className="fas fa-trash " />
+      </Button>
     </TodoItemLi>
 
   )
