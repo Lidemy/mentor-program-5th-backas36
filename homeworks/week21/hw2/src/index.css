@@ -1,0 +1,11 @@
+  html,
+  body {
+    background-color: #dec3a1;
+  }
+
+  #root {
+    display: flex;
+    max-width: 1000px;
+    margin: 30px auto;
+    justify-content: center;
+  }
