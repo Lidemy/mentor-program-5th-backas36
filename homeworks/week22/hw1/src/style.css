@@ -1,0 +1,7 @@
+html, body {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+#root{
+  padding:0 20px;
+}
