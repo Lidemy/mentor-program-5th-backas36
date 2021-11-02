@@ -133,7 +133,7 @@ useRef 會回傳一個 mutable 的 ref object，其中 `current` 屬性的值就
 ```
 useImperativeHandle(ref, createHandle, [deps])
 ```
-第一個參數是放要使用的 reft，第二個參數是放要傳給 component 的行為，最後則是依賴。和使用 `ref` 類似，但使用`useImperativeHandle` 時，上層 component 可以存取 ref。
+第一個參數是放要使用的 ref，第二個參數是放要傳給 component 的行為，最後則是依賴。和使用 `ref` 類似，但使用`useImperativeHandle` 時，上層 component 可以存取 ref。
 
 ### useLayoutEffect
 與`useEffect`雷同，不過 `useEffect` 為瀏覽器渲染完成後執行，而 `useLayoutEffect` 是瀏覽器渲染完成前執行
