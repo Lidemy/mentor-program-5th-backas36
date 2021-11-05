@@ -28,7 +28,7 @@ useEffect 預設是每次瀏覽器完成 render 後觸發 effect，可以指定�
 
 如果只想要 useEffect 內的 function 在瀏覽器第一次 render 後 執行一次，可以傳遞空陣列 `[]` 作為依賴，即代表此 useEffect 沒有依賴任何 props 或 state 值，因為再怎麼 render 空陣列就代表空陣列，沒有改變了任何值，就不會執行 useEffect 的 function。
 
-如果 useEffect 裡面 return 一個 function ，這個 function 會在此 component 消失前被執行。
+如果 useEffect 裡面 return 一個 function ，這個 function 會在此 component unmount 以前，或是下一次 effect 被執行前 執行這個 return function。
 
 ### useContext
 

@@ -61,8 +61,8 @@ const LoginPage = () => {
 
     if (!username || !password) return setErrorMsg('請填入完整資料')
 
-    const loginResult = await login(username, password)
     try {
+      const loginResult = await login(username, password)
       if (loginResult.ok === 0) return setErrorMsg(loginResult.message)
       setAuthToken(loginResult.token)
 
