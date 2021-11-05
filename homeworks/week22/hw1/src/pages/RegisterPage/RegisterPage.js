@@ -37,7 +37,7 @@ const Button = styled.button`
   }
 
 `
-const InputTItle = styled.label`
+const InputTitle = styled.label`
   font-weight:bold;
   font-size:18px;
   color:rgba(0,0,0, 0.6);
@@ -94,26 +94,26 @@ const RegisterPage = () => {
   return (
     <FormContainer onSubmit={handleSubmit}>
       <div>
-        <InputTItle>username
+        <InputTitle>username
           <input value={username} onChange={e => setUsername(e.target.value)} />
-        </InputTItle>
+        </InputTitle>
       </div>
       <div>
-        <InputTItle>nickname
+        <InputTitle>nickname
           <input value={nickname} onChange={e => setNickname(e.target.value)} />
-        </InputTItle>
+        </InputTitle>
       </div>
       <div>
-        <InputTItle>
+        <InputTitle>
           password
           <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        </InputTItle>
+        </InputTitle>
       </div>
       <div>
-        <InputTItle>
+        <InputTitle>
           comfirm password
           <input type="password" value={password2} onChange={e => setPassword2(e.target.value)} />
-        </InputTItle>
+        </InputTitle>
       </div>
       <Button type="reset" onClick={handleResetClick}>Reset</Button>
       <Button type="submit">Register</Button>
