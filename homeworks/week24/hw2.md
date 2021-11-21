@@ -21,6 +21,6 @@ React 有提供 `ReactDOMServer.renderToString()` 可以將 component 渲染成 
 
 ## 承上，除了原生的方法，有哪些現成的框架或是工具提供了 SSR 的解決方案？至少寫出兩種
 
-- Next.js : React 提供的 SSR 框架。
+- Next.js : 為一個基於 React 的 library，可以提供 SSR, Webpack, Router 功能。
 
 - Prerender : 將網頁渲染之後再回傳給瀏覽器，這樣瀏覽器收到的 HTML 會是預渲染完成的 HTML，適合小型專案。
