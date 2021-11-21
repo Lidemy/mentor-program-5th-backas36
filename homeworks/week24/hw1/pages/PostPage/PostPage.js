@@ -81,7 +81,7 @@ const PostPage = () => {
           <PostWrapper>
             <PostTitle>{title}</PostTitle>
             <PostCreated>
-              <PostAuthor>{post.user.nickname}</PostAuthor>
+              <PostAuthor>{post.user?.nickname}</PostAuthor>
               <PostDate>{new Date(createdAt).toLocaleString()}</PostDate>
             </PostCreated>
             <PostBody>{body}</PostBody>

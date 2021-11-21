@@ -3,16 +3,17 @@ const BASE_URL = 'https://student-json-api.lidemy.me'
 
 export const getPosts = async () => {
   const result = await fetch(`${BASE_URL}/posts?_sort=createdAt&_order=desc&_expand=user`)
-  return result.json()
+  return await result.json()
 }
 
 export const getLast5Posts = async (pageNum, eachPageAmount) => {
   const result = await fetch(`${BASE_URL}/posts?_sort=createdAt&_order=desc&_page=${pageNum}&_limit=${eachPageAmount}&_expand=user`)
-  return result.json()
+  return await result.json()
 }
 
-export const getSinglePost = (id) => {
-  return fetch(`${BASE_URL}/posts/${id}?_expand=user`).then(res => res.json())
+export const getSinglePost = async (id) => {
+  const result = await fetch(`${BASE_URL}/posts/${id}?_expand=user`)
+  return await result.json()
 }
 
 export const login = async (username, password) => {
@@ -26,7 +27,7 @@ export const login = async (username, password) => {
       password
     })
   })
-  return reuslt.json()
+  return await reuslt.json()
 }
 
 export const getMe = async () => {
@@ -36,7 +37,7 @@ export const getMe = async () => {
       'authorization': `Bearer ${token}`
     }
   })
-  return result.json()
+  return await result.json()
 }
 export const delelePostAPI = async (id) => {
   const token = getAuthToken()
@@ -47,7 +48,7 @@ export const delelePostAPI = async (id) => {
       'authorization': `Bearer ${token}`
     }
   })
-  return result.json()
+  return await result.json()
 }
 export const postNewPost = async (title, body) => {
   const token = getAuthToken()
@@ -62,7 +63,7 @@ export const postNewPost = async (title, body) => {
       body
     })
   })
-  return result.json()
+  return await result.json()
 }
 export const patchPostAPI = async (id, data) => {
   const { editedTitle, editedBody } = data
@@ -78,7 +79,7 @@ export const patchPostAPI = async (id, data) => {
       body: editedBody
     })
   })
-  return result.json()
+  return await result.json()
 }
 export const register = async (username, nickname, password) => {
   const result = await fetch(`${BASE_URL}/register`, {
@@ -92,11 +93,11 @@ export const register = async (username, nickname, password) => {
       password
     })
   })
-  return result.json()
+  return await result.json()
 }
 
 // 目前沒用到，以後可能會用到的 api
 export const getUserNickname = async (userId) => {
   const result = await fetch(`${BASE_URL}/users/${userId}`)
-  return result.json()
+  return await result.json()
 }

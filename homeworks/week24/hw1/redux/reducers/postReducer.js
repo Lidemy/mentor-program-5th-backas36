@@ -63,6 +63,7 @@ export const getPost = (id) => (dispatch) => {
       dispatch(setIsLoginPost(false))
     })
     .catch(err => {
+      dispatch(setIsLoginPost(false))
       console.log(err)
     })
 }
@@ -81,6 +82,7 @@ export const getAllPosts = () => dispatch => {
       dispatch(setIsLoginPost(false))
     })
     .catch(err => {
+      dispatch(setIsLoginPost(false))
       console.log(err)
     })
 
@@ -104,6 +106,7 @@ export const patchPost = (id, data) => dispatch => {
       return res
     })
     .catch(err => {
+      dispatch(setIsLoginPost(false))
       console.log(err)
     })
 }
@@ -116,6 +119,7 @@ export const getSelectedPosts = (pageNum, eachPageAmount) => dispatch => {
       dispatch(setIsLoginPost(false))
     })
     .catch(err => {
+      dispatch(setIsLoginPost(false))
       console.log(err)
     })
 }
