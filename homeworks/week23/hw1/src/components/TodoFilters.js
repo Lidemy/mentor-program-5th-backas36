@@ -19,21 +19,19 @@ const TodoFilters = () => {
         icon={<SmileOutlined />}
         type="primary"
         size="large"
-        ghost={currentFilter !== '已完成'}
-        onClick={() => dispatch(setFilter('已完成'))}
+        ghost={currentFilter !== 'completed'}
+        onClick={() => dispatch(setFilter('completed'))}
 
       >已完成</Button>
       <Button
         icon={<FrownOutlined />}
         type="danger"
         size="large"
-        ghost={currentFilter !== '未完成'}
-        onClick={() => dispatch(setFilter('未完成'))}
+        ghost={currentFilter !== 'incompleted'}
+        onClick={() => dispatch(setFilter('incompleted'))}
       >未完成</Button>
     </Row>
   )
 }
 
 export default TodoFilters
-
-//<ReloadOutlined />

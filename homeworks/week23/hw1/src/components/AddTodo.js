@@ -7,7 +7,6 @@ import { addTodo } from '../redux/actions'
 
 const AddTodo = () => {
   const [value, setValue] = useState('')
-  //const [isModalShow, setIsModalShow] = useState(false)
   const dispatch = useDispatch()
 
   const handleInputChange = (e) => {
@@ -54,14 +53,6 @@ const AddTodo = () => {
       >
         Add
       </Button>
-      {/*<Modal title="Basic Modal"
-        visible={isModalShow}
-        //onOk={() => setIsModalShow(false)}
-        onCancel={() => setIsModalShow(false)}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Modal>*/}
     </Row>
   )
 }

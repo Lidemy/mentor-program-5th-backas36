@@ -13,5 +13,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-//https://backas36.github.io/antd-react-todolist/
